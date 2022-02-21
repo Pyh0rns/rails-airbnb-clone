@@ -1,0 +1,2 @@
+class StudiosController < ApplicationController
+end
