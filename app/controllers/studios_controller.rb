@@ -2,6 +2,6 @@ class StudiosController < ApplicationController
   def index
   end
 
-  def shown
+  def show
   end
 end
