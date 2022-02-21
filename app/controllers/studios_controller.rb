@@ -4,12 +4,12 @@ class StudiosController < ApplicationController
   end
 
   def show
-    @studios = Studio.find(studio_params)
+    @studio = Studio.find(params[:id])
   end
 
   private
 
   def studio_params
-    param.require(:studio).permit(:address, :title, :description, :price, :available)
+    params.require(:studio).permit(:address, :title, :description, :price, :available)
   end
 end
