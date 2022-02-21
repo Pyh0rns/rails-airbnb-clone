@@ -13,4 +13,9 @@
   <i class="fas fa-undo"></i>
   <% end %>
 </p>
+
+<%# Seulement si user connecté et que c'est son studio %>
+<%= link_to 'edit', edit_studio_path(@studio)  %>
+<%= link_to 'delete', studio_path(@studio),
+method: :delete, data: { confirm: "Are you sure?" } %>
 </div>
