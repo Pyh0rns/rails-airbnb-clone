@@ -1,8 +1,21 @@
-<h1>test</h1>
+<div class="banner-small mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
+  <div class="container">
+    <h1>Index !</h1>
+    <p>Music studios</p>
+  </div>
+</div>
 
-<% @studios.each do |studio| %>
-  <p><%= studio.title %></p>
-  <p><%= studio.address%></p>
-  <p><%= studio.description %></p>
-  <p><%= studio.price %></p>
-<% end %>
+
+<div class="container">
+  <% @studios.each do |studio| %>
+    <div class="card-product mb-3">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+      <div class="card-product-infos">
+        <h2><%= studio.title %></h2>
+        <p><%= studio.description %></p>
+        <p><%= studio.address%></p>
+        <p><%= studio.price %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -3,7 +3,6 @@
 #
 puts "start"
 
-
 User.create!(email: 'coucou@gmail.com', password: 'azerty' )
 User.create!(email: 'ola@gmail.com', password: 'azerty')
 
