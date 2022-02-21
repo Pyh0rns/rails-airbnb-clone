@@ -8,5 +8,9 @@
 
 <h1 class="d-flex justify-content-center"> <strong> <%= @studio.title %></strong></h1>
 <p class="d-flex justify-content-center mt-5"> <%= @studio.description %></p>
-
+<p> Back
+  <%= link_to studios_path, class: "text-warning" do %>
+  <i class="fas fa-undo"></i>
+  <% end %>
+</p>
 </div>
