@@ -1,1 +1,8 @@
 <h1>test</h1>
+
+<% @studios.each do |studio| %>
+  <p><%= studio.title %></p>
+  <p><%= studio.address%></p>
+  <p><%= studio.description %></p>
+  <p><%= studio.price %></p>
+<% end %>
