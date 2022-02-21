@@ -13,6 +13,7 @@ class StudiosController < ApplicationController
 
   def create
     @user_id = 1 # to be changed with real user id
+    # @user_id = User.find(params[:TO DO][:TO DO])
     @studio = Studio.new(studio_params)
     @studio.user_id = @user_id
     if @studio.save
