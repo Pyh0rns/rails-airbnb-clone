@@ -4,7 +4,7 @@ class StudiosController < ApplicationController
   end
 
   def show
-    @studios = Studio.find(params[:id])
+    @studios = Studio.find(studio_params)
   end
 
   private
