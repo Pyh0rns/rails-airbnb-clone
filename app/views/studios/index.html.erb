@@ -8,14 +8,16 @@
 
 <div class="container">
   <% @studios.each do |studio| %>
-    <div class="card-product mb-3">
-      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-      <div class="card-product-infos">
-        <h2><%= studio.title %></h2>
-        <p><%= studio.description %></p>
-        <p><%= studio.address%></p>
-        <p><%= studio.price %></p>
+    <%= link_to studio_path(studio) do  %>
+      <div class="card-product mb-3">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <div class="card-product-infos">
+          <h2><%= studio.title %></h2>
+          <p><%= studio.description %></p>
+          <p><%= studio.address%></p>
+          <p><%= studio.price %></p>
+        </div>
       </div>
-    </div>
+      <% end %>
   <% end %>
 </div>
