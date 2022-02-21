@@ -1,7 +1,8 @@
 class StudiosController < ApplicationController
   def index
+    @studios = Studio.all
   end
 
-  def shown
+  def show
   end
 end
