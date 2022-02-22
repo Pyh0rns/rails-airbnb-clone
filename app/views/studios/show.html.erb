@@ -6,6 +6,11 @@
   </div>
 </div>
 
+<%# ------------ TEST POUR FAIRE APPARAITRES LES BOOKINGS SUR LA SHOW -------------- %>
+  <%# @studio.bookings.each do |booking| %>
+    <%# <h1 style="color:black;"> You have a booking from <%= booking.studio.user.nickname %></h1>
+  <%# end%>
+
 <div class="studioinfos">
 
   <h1 class="d-flex justify-content-center"> <strong> <%= @studio.title %></strong></h1>
@@ -58,6 +63,7 @@
     <i class="fas fa-undo"></i>
     <% end %>
   </p>
+
 
   <% if policy(@studio).edit? %>
     <%= link_to 'edit studio', edit_studio_path(@studio), class:"btn btn-primary mb-3" %>
