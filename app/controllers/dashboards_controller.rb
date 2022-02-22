@@ -4,12 +4,14 @@ class DashboardsController < ApplicationController
 # before_action :authenticate_user!, except: [:index, :show]
 
   def profile
-    @user = User.first
+    @user = current_user
+    authorize @user
   end
 
-  # def show
-  #   @user = user.find(user_params)
-  # end
+  def show
+    @user = user.find(user_params)
+    authorize @user
+  end
 
   # def edit
   #   @user = user.find(params[:id])
