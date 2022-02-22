@@ -15,11 +15,9 @@ class StudiosController < ApplicationController
   end
 
   def create
-    @user_id = 1 # to be changed with real user id
-    # @user_id = current_user
     @studio = Studio.new(studio_params)
     authorize @studio
-    @studio.user_id = @user_id
+    @studio.user_id = current_user.id
     if @studio.save
       redirect_to studio_path(@studio)
     else
