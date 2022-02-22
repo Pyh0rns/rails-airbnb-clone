@@ -5,6 +5,11 @@
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
+  opacity: 0.8;
+  &:hover {
+    opacity: 1;
+    box-shadow: 20px rgba(0,0,0,0.9);
+  }
 }
 
 .card-product img {
@@ -31,6 +36,7 @@
   padding: 16px;
 }
 
+<<<<<<< HEAD
 
 .cards-row_card{
   padding: 20px;
@@ -69,4 +75,20 @@
   color: #fff;
   padding: 10px;
   margin: 0;
+=======
+.linkto {
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+>>>>>>> 1c06d1cf693de0c44bbc5a79c0e9f133b12d9483
 }
