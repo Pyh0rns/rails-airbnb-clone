@@ -36,4 +36,4 @@ studio2 = Studio.create!(address: "kingston", title: "Reggae Master Studio", des
   Booking.create!(studio_id: studio1.id, user_id: marin.id )
   Booking.create!(studio_id: studio2.id, user_id: felix.id )
 
-puts "C'est tout bon les gars!"
+puts "C'est tout bon les gars!!"
