@@ -59,18 +59,11 @@
     <% end %>
   </p>
 
-
-<<<<<<< HEAD
-  <%# Seulement si user connecté et que c'est son studio %>
-  <%= link_to 'edit studio', edit_studio_path(@studio), class:"btn btn-primary mb-3" %>
-  <%= link_to 'delete studio', studio_path(@studio), class:"btn btn-warning",
-=======
   <% if policy(@studio).edit? %>
     <%= link_to 'edit studio', edit_studio_path(@studio), class:"btn btn-primary mb-3" %>
   <% end %>
   <% if policy(@studio).destroy? %>
     <%= link_to 'delete studio', studio_path(@studio), class:"btn btn-warning",
->>>>>>> a0799680863f7b9a752dd301f5d1fd414d33a4e6
-  method: :delete, data: { confirm: "Are you sure?" } %>
+    method: :delete, data: { confirm: "Are you sure?" } %>
   <% end %>
 </div>
