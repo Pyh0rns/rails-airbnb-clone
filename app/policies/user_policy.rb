@@ -6,11 +6,12 @@ class UserPolicy < ApplicationPolicy
     # end
   end
 
-  def profile?
+  def my_profile?
+    # record == user
     true
   end
 
-  def show?
+  def profile?
     true
   end
 end

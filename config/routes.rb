@@ -6,8 +6,8 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create, :index]
   end
 
-  get '/profile', to: 'dashboards#profile'
-  get 'profile/:id', to: 'dashboards#show'
+  get '/my_profile', to: 'dashboards#my_profile'
+  get 'profile/:id', to: 'dashboards#profile'
   patch 'bookings/:id', to: 'dashboards#accept'
   patch 'bookings/:id', to: 'dashboards#decline'
 end
