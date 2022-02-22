@@ -2,12 +2,11 @@
   <div class="banner-small mb-5 profil-page-banner">
 
     <div class="container">
-      <h1> This is your Pages#profile </h1>
+      <h1> This is your Pages#profile <%= @current_user.nickname %> </h1>
       <p>Music studios</p>
     </div>
-    <img class="avatar-large" alt="avatar-large" src="https://kitt.lewagon.com/placeholder/users/arthur-littm" />
+    <img class="avatar-large" alt="avatar-large" src="<%= current_user.photo_id_url %>" />
   </div>
-
 
   <h1 class="text-center mt-3">hello <%=  @user.email %></h1>
 

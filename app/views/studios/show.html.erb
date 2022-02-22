@@ -41,6 +41,17 @@
   </div>
 </div>
 
+
+<div class="container mt-5">
+    <h2 class="text-center">Book a session </h2>
+    <%= simple_form_for [@studio, @booking] do |f| %>
+      <%= f.input :start_date %>
+      <%= f.input :end_date %>
+      <%= f.submit class:"btn btn-primary mt-2 d-grid gap-2 col-6 mx-auto" %>
+    <% end %>
+  </div>
+
+
 <div class="basdepage mt-5">
   <p> Back
     <%= link_to studios_path, class: "text-warning" do %>
@@ -48,12 +59,11 @@
     <% end %>
   </p>
 
-
   <% if policy(@studio).edit? %>
     <%= link_to 'edit studio', edit_studio_path(@studio), class:"btn btn-primary mb-3" %>
   <% end %>
   <% if policy(@studio).destroy? %>
     <%= link_to 'delete studio', studio_path(@studio), class:"btn btn-warning",
-  method: :delete, data: { confirm: "Are you sure?" } %>
+    method: :delete, data: { confirm: "Are you sure?" } %>
   <% end %>
 </div>
