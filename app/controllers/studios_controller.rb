@@ -15,7 +15,7 @@ class StudiosController < ApplicationController
 
   def create
     @user_id = 1 # to be changed with real user id
-    # @user_id = User.find(params[:TO DO][:TO DO])
+    # @user_id = current_user
     @studio = Studio.new(studio_params)
     authorize @studio
     @studio.user_id = @user_id

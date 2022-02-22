@@ -12,7 +12,7 @@
     <% @studios.each do |studio| %>
       <%= link_to studio_path(studio), class:"linkto" do  %>
         <div class="card-product mb-3">
-          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+          <img src="<%= studio.photo_url %>" />
           <div class="card-product-infos">
             <h2><%= studio.title %></h2>
             <p><%= studio.description %></p>
