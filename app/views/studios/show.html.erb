@@ -6,8 +6,15 @@
   </div>
 </div>
 
-<div class="studioinfos">
+<%# --------- SEULEMENT LE PROPRIETAIRE DU STUDIO VOIT LES BOOKINGS --------- %>
+<%if  @studio.user == current_user %>
+  <% @studio.bookings.each do |booking| %>
+     <h1 style="color:black;"> You have a booking from <%= booking.user.nickname %></h1>
+  <% end%>
+<%end %>
 
+
+<div class="studioinfos">
   <h1 class="d-flex justify-content-center"> <strong> <%= @studio.title %></strong></h1>
   <p class="d-flex justify-content-center mt-5"> <%= @studio.description %></p>
 </div>
@@ -53,6 +60,7 @@
     <i class="fas fa-undo"></i>
     <% end %>
   </p>
+
 
   <% if policy(@studio).edit? %>
     <%= link_to 'edit studio', edit_studio_path(@studio), class:"btn btn-primary mb-3" %>
