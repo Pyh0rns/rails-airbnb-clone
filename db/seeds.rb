@@ -9,10 +9,10 @@ Studio.destroy_all
 puts "destroy old users"
 User.destroy_all
 puts "create users"
-py = User.create!(email: 'py@gmail.com', password: 'azerty', nickname: "PY", photo_id_url: "https://images.unsplash.com/photo-1532731222443-b3ef89fbc50d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8YW5pbWFsJTIwcG9ydHJhaXR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60")
-marin = User.create!(email: 'm@gmail.com', password: 'azerty', nickname: "Marin", photo_id_url: "https://images.unsplash.com/photo-1604605152447-1fcea1a333f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80")
-manu = User.create!(email: 'mm@gmail.com', password: 'azerty', nickname: "Manu", photo_id_url: "https://images.unsplash.com/photo-1617419849063-cdd02841550d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80")
-felix = User.create!(email: 'f@gmail.com', password: 'azerty', nickname: "Felix", photo_id_url: "https://images.unsplash.com/photo-1512636998392-acdc97b72114?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80")
+py = User.create!(email: 'py@gmail.com', password: 'azerty', nickname: "PY", photo_id_url: "https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fGZhY2V8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60")
+marin = User.create!(email: 'm@gmail.com', password: 'azerty', nickname: "Marin", photo_id_url: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fGZhY2V8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60")
+manu = User.create!(email: 'mm@gmail.com', password: 'azerty', nickname: "Manu", photo_id_url: "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmFjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60")
+felix = User.create!(email: 'f@gmail.com', password: 'azerty', nickname: "Felix", photo_id_url: "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZmFjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60")
 
 puts "create studios"
 studio1 = Studio.create!(address: "lille", title: "Crazy Metal Studio", description: "Premium studio
