@@ -6,7 +6,11 @@ class StudiosController < ApplicationController
 
   def show
     @studio = Studio.find(params[:id])
+<<<<<<< HEAD
+    @booking = Booking.new
+=======
     authorize @studio
+>>>>>>> a0799680863f7b9a752dd301f5d1fd414d33a4e6
   end
 
   def new
