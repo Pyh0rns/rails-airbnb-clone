@@ -12,7 +12,13 @@
     <% @studios.each do |studio| %>
       <%= link_to studio_path(studio), class:"linkto" do  %>
         <div class="card-product mb-3">
-          <img src="<%= studio.photo_url %>" />
+
+          <% if studio.photo_url.nil? %>
+          <%= cl_image_tag studio.photos.first.key%>
+          <% else %>
+            <img src= "<%=studio.photo_url%>"/>
+          <% end %>
+
           <div class="card-product-infos">
             <h2><%= studio.title %></h2>
             <p><%= studio.description %></p>
