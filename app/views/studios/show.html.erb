@@ -6,11 +6,16 @@
 
 <div class="container">
 
-<h1 class="d-flex justify-content-center"> <strong> <%= @studio.title %></strong></h1>
-<p class="d-flex justify-content-center mt-5"> <%= @studio.description %></p>
-<p> Back
-  <%= link_to studios_path, class: "text-warning" do %>
-  <i class="fas fa-undo"></i>
-  <% end %>
-</p>
+  <h1 class="d-flex justify-content-center"> <strong> <%= @studio.title %></strong></h1>
+  <p class="d-flex justify-content-center mt-5"> <%= @studio.description %></p>
+  <p> Back
+    <%= link_to studios_path, class: "text-warning" do %>
+    <i class="fas fa-undo"></i>
+    <% end %>
+  </p>
+
+  <%# Seulement si user connecté et que c'est son studio %>
+    <%= link_to 'edit studio', edit_studio_path(@studio), class:"btn btn-primary mb-3" %>
+    <%= link_to 'delete studio', studio_path(@studio), class:"btn btn-warning",
+  method: :delete, data: { confirm: "Are you sure?" } %>
 </div>
