@@ -1,4 +1,5 @@
 class StudiosController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @studios = policy_scope(Studio).order(created_at: :desc)
   end
