@@ -5,4 +5,13 @@ class UserPolicy < ApplicationPolicy
     #   scope.all
     # end
   end
+
+  def my_profile?
+    # record == user
+    true
+  end
+
+  def profile?
+    true
+  end
 end
