@@ -6,45 +6,45 @@
   </div>
 </div>
 
-<%# ------------ TEST POUR FAIRE APPARAITRES LES BOOKINGS SUR LA SHOW -------------- %>
-  <%# @studio.bookings.each do |booking| %>
-    <%# <h1 style="color:black;"> You have a booking from <%= booking.studio.user.nickname %></h1>
-  <%# end%>
+<%# --------- SEULEMENT LE PROPRIETAIRE DU STUDIO VOIT LES BOOKINGS --------- %>
+<%if  @studio.user == current_user %>
+  <% @studio.bookings.each do |booking| %>
+     <h1 style="color:black;"> You have a booking from <%= booking.user.nickname %></h1>
+  <% end%>
+<%end %>
+
 
 <div class="studioinfos">
-
   <h1 class="d-flex justify-content-center"> <strong> <%= @studio.title %></strong></h1>
   <p class="d-flex justify-content-center mt-5"> <%= @studio.description %></p>
 </div>
 
-<div class="carouselle d-flex justify-content-center">
-  <div id="carouselExampleIndicators" class="carousel slide input-group w-50" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+<% if @studio.photos.length > 1%>
+  <div class="carouselle d-flex justify-content-center">
+    <div id="carouselExampleIndicators" class="carousel slide input-group w-50" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <% @studio.photos.each do |photo| %>
+            <div class="carousel-item <%= 'active' if @studio.photos.index(photo) == 0 %>">
+              <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+            </div>
+          <% end %>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="https://images.unsplash.com/photo-1600660585289-c82cbd373e13?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fG11c2ljcyUyMHN0dWRpb3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="https://images.unsplash.com/photo-1463421585849-6b0acf2c9257?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8bXVzaWNzJTIwc3R1ZGlvfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60" class="d-block w-100" alt="...">
-      </div>
-      <div class="carousel-item">
-        <img src="https://images.unsplash.com/photo-1543510616-a4025b9c1434?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljcyUyMHN0dWRpb3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60" class="d-block w-100" alt="...">
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
   </div>
-</div>
+<%end %>
 
 
 <div class="container mt-5">

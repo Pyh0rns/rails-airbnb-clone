@@ -2,6 +2,10 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 puts "start"
+puts "destroy old bookings"
+Booking.destroy_all
+puts "destroy old studios"
+Studio.destroy_all
 puts "destroy old users"
 User.destroy_all
 puts "create users"
@@ -9,8 +13,7 @@ py = User.create!(email: 'py@gmail.com', password: 'azerty', nickname: "PY", pho
 marin = User.create!(email: 'm@gmail.com', password: 'azerty', nickname: "Marin", photo_id_url: "https://images.unsplash.com/photo-1604605152447-1fcea1a333f3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80")
 manu = User.create!(email: 'mm@gmail.com', password: 'azerty', nickname: "Manu", photo_id_url: "https://images.unsplash.com/photo-1617419849063-cdd02841550d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80")
 felix = User.create!(email: 'f@gmail.com', password: 'azerty', nickname: "Felix", photo_id_url: "https://images.unsplash.com/photo-1512636998392-acdc97b72114?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80")
-puts "destroy old studios"
-Studio.destroy_all
+
 puts "create studios"
 studio1 = Studio.create!(address: "lille", title: "Crazy Metal Studio", description: "Premium studio
   facility private in the most desirable spot in town.", price: 100, user_id: felix.id,
@@ -29,11 +32,9 @@ studio2 = Studio.create!(address: "kingston", title: "Reggae Master Studio", des
   the line equipment at some of the most affordable prices.", price: 80,
   user_id: py.id, photo_url:"https://images.unsplash.com/photo-1574882225022-9e0e447e9662?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwc3R1ZGlvfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60")
 
-
-  puts "destroy old bookings"
-  Booking.destroy_all
-  puts "create bookings"
-  Booking.create!(studio_id: studio1.id, user_id: marin.id )
-  Booking.create!(studio_id: studio2.id, user_id: felix.id )
+puts "create bookings"
+Booking.create!(studio_id: studio1.id, user_id: marin.id )
+Booking.create!(studio_id: studio2.id, user_id: marin.id )
+Booking.create!(studio_id: studio2.id, user_id: manu.id )
 
 puts "C'est tout bon les gars!!"
