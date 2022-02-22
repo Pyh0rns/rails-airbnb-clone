@@ -5,6 +5,7 @@ class StudiosController < ApplicationController
 
   def show
     @studio = Studio.find(params[:id])
+    @booking = Booking.new
   end
 
   def new
