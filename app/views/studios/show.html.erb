@@ -1,6 +1,8 @@
 <div class="banner-small mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.ctfassets.net/anpxw7hl9rcg/6i3V4opLFffyrrG6WoCYsP/f9fdb70e292ce2969d8021a0632afb82/_10_gargolandia.jpg);">
   <div class="container">
-    <h1>Studio Image</h1>
+    <h1><%= @studio.title %></h1>
+    <h1>Owner: <%= @studio.user.nickname %></h1>
+    <img class="avatar" src="<%=@studio.user.photo_id_url%>" alt="">
   </div>
 </div>
 
@@ -58,8 +60,17 @@
   </p>
 
 
+<<<<<<< HEAD
   <%# Seulement si user connecté et que c'est son studio %>
   <%= link_to 'edit studio', edit_studio_path(@studio), class:"btn btn-primary mb-3" %>
   <%= link_to 'delete studio', studio_path(@studio), class:"btn btn-warning",
+=======
+  <% if policy(@studio).edit? %>
+    <%= link_to 'edit studio', edit_studio_path(@studio), class:"btn btn-primary mb-3" %>
+  <% end %>
+  <% if policy(@studio).destroy? %>
+    <%= link_to 'delete studio', studio_path(@studio), class:"btn btn-warning",
+>>>>>>> a0799680863f7b9a752dd301f5d1fd414d33a4e6
   method: :delete, data: { confirm: "Are you sure?" } %>
+  <% end %>
 </div>

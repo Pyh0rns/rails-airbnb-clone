@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   get '/profile', to: 'dashboards#profile'
+  get 'profile/:id', to: 'dashboards#show'
   patch 'bookings/:id', to: 'dashboards#accept'
   patch 'bookings/:id', to: 'dashboards#decline'
 end
