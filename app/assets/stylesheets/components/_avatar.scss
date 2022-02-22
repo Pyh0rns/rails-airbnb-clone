@@ -1,16 +1,16 @@
 .avatar {
   width: 40px;
   border-radius: 50%;
-}
-.avatar-large {
-  width: 150px;
-  border-radius: 50%;
-  margin: 10px auto 20px;
-  display: block;
-  position: absolute;
-/* on définit les coordonnées de l'image (x, y) */
-  left: 581px;
-  top: 350px
+  &-large {
+    width: 150px;
+    border-radius: 50%;
+    margin: 10px auto 20px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -20%;
+  }
 }
 .avatar-bordered {
   width: 40px;

@@ -30,3 +30,43 @@
 .card-product .card-product-infos {
   padding: 16px;
 }
+
+
+.cards-row_card{
+  padding: 20px;
+}
+
+.cards-row_card .cards-row_card-image{
+  width: 100%;
+  height: auto;
+}
+
+
+.cards-row-overlay{
+  position: relative;
+  overflow: hidden;
+}
+
+.cards-row-overlay:hover .cards-row_card-image {
+  transform: scale(1.2);
+  transition: transform .4s ease;
+}
+
+.cards-row_card .cards-row_card-content{
+  padding: 10px;
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  background: red;
+}
+
+.cards-row_card .cards-row_card-content > div{
+  justify-content: space-between;
+}
+
+.cards-row-overlay_content{
+  color: #fff;
+  padding: 10px;
+  margin: 0;
+}
