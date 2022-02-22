@@ -15,7 +15,11 @@
   </p>
 
   <%# Seulement si user connecté et que c'est son studio %>
+  <% if policy(@studio).edit? %>
     <%= link_to 'edit studio', edit_studio_path(@studio), class:"btn btn-primary mb-3" %>
+  <% end %>
+  <% if policy(@studio).destroy? %>
     <%= link_to 'delete studio', studio_path(@studio), class:"btn btn-warning",
   method: :delete, data: { confirm: "Are you sure?" } %>
+  <% end %>
 </div>
