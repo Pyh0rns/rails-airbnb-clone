@@ -1,29 +1,33 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-
-
   <div class="container-fluid">
     <div>
-      <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "logo.png" %>
-      <h1>Studio</h1>
+      <%= link_to "/", class: "navbar-brand" do %>
+        <%= image_tag "logo.png" %>
+        <h1>Studio</h1>
+      <% end %>
     </div>
-    <div>
-    <p>t itle</p>
+
+    <div class="d-flex align-items-center">
+      <%= link_to "Post Studio", new_studio_path, class: "navbar-wagon-button btn "%>
+
+      <% if user_signed_in? %>
+
+        <li class="nav-item dropdown">
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <%= link_to "My profile", my_profile_path, class: "dropdown-item" %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </li>
+
+      <% else %>
+
+        <li class="nav-item">
+          <%= link_to "Login", new_user_session_path, class: "link-white" %>
+        </li>
+
+      <% end %>
+
     </div>
-    <% end %>
-
-<%# <!-- Search form -->
-    <form action="" class="navbar-wagon-search">
-      <input type="text" class="navbar-wagon-search-input" placeholder="Search Studio">
-      <button type="submit" class="navbar-wagon-search-btn">
-        <i class="fa fa-search"></i>
-      </button>
-    </form> %>
-
-   <%= link_to "Post Studio", new_studio_path, class: "navbar-wagon-item navbar-wagon-button btn "%>
-
-
-
-
   </div>
 </div>
