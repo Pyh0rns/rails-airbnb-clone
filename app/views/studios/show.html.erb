@@ -59,7 +59,7 @@
 <%# --------------------------- FORM BOOKING STUDIO ------------------------- %>
 <div class="container mt-5 d-flex align-items-center justify-content-between">
   <%# -------- partie formulaire ------------- %>
-  <div class="w-50 ms-5">
+  <div class="w-50 ms-5 me-5">
     <h2 class="text-center">Book a session </h2>
     <p>ajouter un champ "comment" au booking</p>
     <%= simple_form_for [@studio, @booking] do |f| %>
@@ -70,10 +70,11 @@
   </div>
   <%# -------- partie bookings ------------- %>
 <%# -- SEULEMENT LE PROPRIETAIRE DU STUDIO VOIT LES BOOKINGS -- %>
-  <div class="me-5">
+  <div class="me-5 ms-5">
     <%if  @studio.user == current_user %>
-    <p>you have <%= @studio.bookings.length %> bookings pending</p>
+    <p>You have <%= @studio.bookings.length %> bookings pending</p>
       <% @studio.bookings.each do |booking| %>
+      <%# mettre un link_to vers son profile id pour pouvoir gerer les notifs  %>
         <div class="card-booking">
           <h3 style="color:black;"> You have a booking from <%= booking.user.nickname %></h3>
         </div>
