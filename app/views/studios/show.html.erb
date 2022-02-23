@@ -16,10 +16,11 @@
 
 <%end %>
 
-
-<div class="studioinfos">
-  <h2 class="d-flex justify-content-center"> <strong> <%= @studio.title %></strong></h2>
-  <p class="d-flex justify-content-center mt-3"> <%= @studio.description %></p>
+<div class="container">
+  <div class="studioinfos">
+    <h2 class="d-flex justify-content-center"> <strong> <%= @studio.title %></strong></h2>
+    <p class="d-flex justify-content-center mt-3"> <%= @studio.description %></p>
+  </div>
 </div>
 
 <% if @studio.photos.length > 1%>
@@ -60,19 +61,17 @@
   </div>
 
 
-<div class="basdepage mt-5">
-  <p> Back
+  <div class="basdepage mt-5 ms-3">
+    <p> Back
     <%= link_to studios_path, class: "text-warning" do %>
     <i class="fas fa-undo"></i>
     <% end %>
   </p>
-
-
-  <% if policy(@studio).edit? %>
-    <%= link_to 'edit studio', edit_studio_path(@studio), class:"btn btn-primary mb-3" %>
-  <% end %>
-  <% if policy(@studio).destroy? %>
-    <%= link_to 'delete studio', studio_path(@studio), class:"btn btn-warning",
-    method: :delete, data: { confirm: "Are you sure?" } %>
-  <% end %>
+    <% if policy(@studio).edit? %>
+      <%= link_to 'edit studio', edit_studio_path(@studio), class:"btn btn-blue mb-3" %>
+    <% end %>
+    <% if policy(@studio).destroy? %>
+      <%= link_to 'delete studio', studio_path(@studio), class:"btn btn-warning",
+      method: :delete, data: { confirm: "Are you sure?" } %>
+    <% end %>
 </div>
