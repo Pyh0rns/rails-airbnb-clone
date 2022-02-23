@@ -17,7 +17,7 @@
         <% elsif studio.photo_url.nil? && !studio.photos.attached? %>
           <% url = "https://images.unsplash.com/photo-1560844915-bb3189e146ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1863&q=80"%>
         <% else  %>
-          <img src= "<%=studio.photo_url%>"/>
+          <% url = studio.photo_url %>
         <% end %>
         <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= url %>)">
           <h2 class="title-studio-card" > <%= studio.title %> </h2>
@@ -26,11 +26,10 @@
       <% end %>
     <% end %>
 
-
+</div>
 <%# ------------------------------- GEOCODER -------------------------------- %>
   <div style="width: 100%; height: 600px;"
     data-controller="mapbox"
     data-mapbox-markers-value="<%= @markers.to_json %>"
     data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
-</div>
