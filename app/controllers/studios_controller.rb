@@ -2,6 +2,15 @@ class StudiosController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @studios = policy_scope(Studio).order(created_at: :desc)
+    # -------------------------- GEOCODER --------------------------------
+    @markers = @studios.geocoded.map do |studio|
+      {
+        lat: studio.latitude,
+        lng: studio.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { studio: studio }),
+        image_url: helpers.asset_url("logo-map.png")
+      }
+    end
   end
 
   def show
