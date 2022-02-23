@@ -22,6 +22,7 @@
   <p class="d-flex justify-content-center mt-3"> <%= @studio.description %></p>
 </div>
 
+<%# ------------------------- CAROUSEL PHOTOS STUDIO ------------------------ %>
 <% if @studio.photos.length > 1%>
   <div class="carouselle d-flex justify-content-center">
     <div id="carouselExampleIndicators" class="carousel slide input-group w-50" data-bs-ride="carousel">
@@ -49,7 +50,7 @@
   </div>
 <%end %>
 
-
+<%# --------------------------- FORM BOOKING STUDIO ------------------------ %>
 <div class="container mt-5">
     <h2 class="text-center">Book a session </h2>
     <%= simple_form_for [@studio, @booking] do |f| %>
