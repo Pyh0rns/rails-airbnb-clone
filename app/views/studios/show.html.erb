@@ -1,4 +1,15 @@
-<div class="banner-small mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.ctfassets.net/anpxw7hl9rcg/6i3V4opLFffyrrG6WoCYsP/f9fdb70e292ce2969d8021a0632afb82/_10_gargolandia.jpg);">
+<div class="banner-small mb-5"
+<%# banner: soit photo cloudinary, soit photo_url seed soit photo par defaut %>
+  <% if @studio.photo_url.nil? && @studio.photos.attached? %>
+    <% url = cl_image_path @studio.photos.first.key %>
+  <% elsif @studio.photo_url.nil? && !@studio.photos.attached? %>
+    <% url = "https://images.ctfassets.net/anpxw7hl9rcg/6i3V4opLFffyrrG6WoCYsP/f9fdb70e292ce2969d8021a0632afb82/_10_gargolandia.jpg"%>
+  <% else  %>
+    <% url = @studio.photo_url %>
+  <% end %>
+ style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= url %>
+);">
+
   <div class="container">
     <h1><%= @studio.title %></h1>
     <h1>Owner: <%= @studio.user.nickname %></h1>
@@ -7,15 +18,7 @@
   </div>
 </div>
 
-<%# --------- SEULEMENT LE PROPRIETAIRE DU STUDIO VOIT LES BOOKINGS --------- %>
-<%if  @studio.user == current_user %>
-  <% @studio.bookings.each do |booking| %>
-    <div class="card-booking">
-      <h3 style="color:black;"> You have a booking from <%= booking.user.nickname %></h3>
-    </div>
-  <% end%>
-<%end %>
-
+<%# ------------------------- TITRE ET DESCRIPTION -------------------------- %>
 <div class="container">
   <div class="studioinfos">
     <h2 class="d-flex justify-content-center"> <strong> <%= @studio.title %></strong></h2>
@@ -23,45 +26,76 @@
   </div>
 </div>
 
-<%# ------------------------- CAROUSEL PHOTOS STUDIO ------------------------ %>
-<% if @studio.photos.length > 1%>
-  <div class="carouselle d-flex justify-content-center">
-    <div id="carouselExampleIndicators" class="carousel slide input-group w-50" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+<%# -------------- CAROUSEL PHOTOS STUDIO si photos cloudi >= 3 -------------- %>
+<div class="container">
+  <% if @studio.photos.length > 1%>
+    <div class="carouselle d-flex justify-content-center">
+      <div id="carouselExampleIndicators" class="carousel slide input-group w-50" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <% @studio.photos.each do |photo| %>
+              <div class="carousel-item <%= 'active' if @studio.photos.index(photo) == 0 %>">
+                <%= cl_image_tag photo.key, class: 'w-100' %>
+              </div>
+            <% end %>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      <div class="carousel-inner">
-        <% @studio.photos.each do |photo| %>
-            <div class="carousel-item <%= 'active' if @studio.photos.index(photo) == 0 %>">
-              <%= cl_image_tag photo.key, class: 'w-100' %>
-            </div>
-          <% end %>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
-  </div>
-<%end %>
-
-<%# --------------------------- FORM BOOKING STUDIO ------------------------ %>
-<div class="container mt-5">
-  <h2 class="text-center">Book a session </h2>
-  <%= simple_form_for [@studio, @booking] do |f| %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
-    <%= f.submit class:"btn btn-blue mt-2 d-grid gap-2 col-6 mx-auto" %>
-  <% end %>
+  <%end %>
 </div>
 
+<%# --------------------------- FORM BOOKING STUDIO ------------------------- %>
+<div class="container mt-5 d-flex align-items-center justify-content-between">
+  <%# -------- partie formulaire ------------- %>
+  <div class="w-50 ms-5">
+    <h2 class="text-center">Book a session </h2>
+    <p>ajouter un champ "comment" au booking</p>
+    <%= simple_form_for [@studio, @booking] do |f| %>
+      <%= f.input :start_date %>
+      <%= f.input :end_date %>
+      <%= f.submit class:"btn btn-blue mt-2 d-grid gap-2 col-6 mx-auto" %>
+    <% end %>
+  </div>
+  <%# -------- partie bookings ------------- %>
+<%# -- SEULEMENT LE PROPRIETAIRE DU STUDIO VOIT LES BOOKINGS -- %>
+  <div class="me-5">
+    <%if  @studio.user == current_user %>
+    <p>you have <%= @studio.bookings.length %> bookings pending</p>
+      <% @studio.bookings.each do |booking| %>
+        <div class="card-booking">
+          <h3 style="color:black;"> You have a booking from <%= booking.user.nickname %></h3>
+        </div>
+      <% end%>
+    <%end %>
+  </div>
 
+<%# -- SEULEMENT LA PERSONNE QUI BOOK VOIT SON BOOKINGS -- %>
+  <div class="me-5">
+    <% @studio.bookings.each do |booking| %>
+      <% if booking.user == current_user %>
+        <div class="card-booking">
+          <h3 style="color:black;"> You booked this studio =>   </h3>
+          <h3 style="color:black;"> from <%= booking.start_date %> to <%= booking.start_date %> </h3>
+          <%# mettre un link to delete booking? %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<%# ---------------------------- BOUTONS ET LIENS -------------------------- %>
 <div class="basdepage mt-5 ms-5">
   <p> Back Home
   <%= link_to studios_path, class: "text-warning" do %>
