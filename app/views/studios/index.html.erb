@@ -2,34 +2,36 @@
   <div class="container">
     <h1>Index !</h1>
     <p>Music studios</p>
-    <%= link_to 'Add your music studio', new_studio_path, class:"linkto btn btn-primary"  %>
+    <%= link_to 'Add your music studio', new_studio_path, class:"linkto btn btn-transparent"  %>
   </div>
 </div>
 
 
+
+
+<%# ---------------------------- CARDS STUDIOS ------------------------------ %>
 <div class="container">
-  <div class="grid">
+  <div class="cards-grid">
     <% @studios.each do |studio| %>
-      <%= link_to studio_path(studio), class:"linkto" do  %>
-        <div class="card-product mb-3">
-
-          <% if studio.photo_url.nil? %>
-          <%= cl_image_tag studio.photos.first.key%>
-          <% else %>
-            <img src= "<%=studio.photo_url%>"/>
-          <% end %>
-
-          <div class="card-product-infos">
-            <h2><%= studio.title %></h2>
-            <p><%= studio.description %></p>
-            <p><%= studio.address%></p>
-            <p><%= studio.price %></p>
-            <p><%= studio.user.email %></p>
-          </div>
-        </div>
+      <%= link_to studio_path(studio), class:"link-without-style" do  %>
+        <% if studio.photo_url.nil? && studio.photos.attached? %>
+          <% url = cl_image_path studio.photos.first.key %>
+        <% elsif studio.photo_url.nil? && !studio.photos.attached? %>
+          <% url = "https://images.unsplash.com/photo-1560844915-bb3189e146ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1863&q=80"%>
+        <% else  %>
+          <% url = studio.photo_url %>
         <% end %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= url %>)">
+          <h2 class="title-studio-card" > <%= studio.title %> </h2>
+          <p class="card-studio-description"> <%= studio.description %> </p>
+        </div>
+      <% end %>
     <% end %>
-  </div>
-
-  <%# console %>
 </div>
+
+<%# ------------------------------- GEOCODER -------------------------------- %>
+  <div class="mt-5" style="width: 100%; height: 600px;"
+    data-controller="mapbox"
+    data-mapbox-markers-value="<%= @markers.to_json %>"
+    data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
