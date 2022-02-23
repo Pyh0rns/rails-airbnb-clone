@@ -2,140 +2,44 @@
   <div class="banner-small mb-5 profil-page-banner">
 
     <div class="container">
-      <h1> This is your Pages#profile <%= @current_user.nickname %> </h1>
+      <h1> This is your Pages Hello #profile <%= @current_user.nickname %> </h1>
       <p>Music studios</p>
     </div>
-    <img class="avatar-large" alt="avatar-large" src="<%= current_user.photo_id_url %>" />
+      <img class="avatar-large" alt="avatar-large" src="<%= current_user.photo_id_url %>" />
   </div>
 
-  <h1 class="text-center mt-3">hello <%=  @user.email %></h1>
 
-
+<%# --------------------mes studios----------------------------------- %>
   <div class="container">
 
-    <h2 class="text-center">Mes demandes</h2>
 
-    <section class="cards-row row">
-      <div class="cards-row_card col-12 col-md-4">
-        <div class="cards-row-overlay">
-          <img src="https://www.stevensegallery.com/300/200" alt="" class="cards-row_card-image">
 
-          <div class="cards-row_card-content">
-            <div class="d-flex">
-              <div>
-                <h3>Titre</h3>
-                <p>Lorem ipsum dolor sit amet.</p>
-              </div>
+    <div class="cards-grid">
+      <% @user.studios.each do |studio| %>
+      <div class="card-profile-studio">
+        <%= link_to studio_path(studio), class:"link-without-style" do  %>
+          <% if studio.photo_url.nil? && studio.photos.attached? %>
+            <% url = cl_image_path studio.photos.first.key %>
+          <% elsif studio.photo_url.nil? && !studio.photos.attached? %>
+            <% url = "https://images.unsplash.com/photo-1560844915-bb3189e146ec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1863&q=80"%>
+          <% else  %>
+            <% url = studio.photo_url %>
+          <% end %>
 
-              <div class="cards-row-overlay_content">
-                <i class="fas fa-usd-circle"></i>
-                300 $
-              </div>
-            </div>
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= url %>)">
+            <h2 class="title-studio-card" > <%= studio.title %> </h2>
+            <p class="card-studio-description"> <%= studio.address %> </p>
           </div>
-        </div>
+        <% end %>
 
-
-
-      </div>
-
-      <div class="cards-row_card col-12 col-md-4">
-        <div class="cards-row-overlay">
-          <img src="https://www.stevensegallery.com/300/200" alt="" class="cards-row_card-image">
-
-          <div class="cards-row_card-content">
-            <div class="d-flex">
-              <div>
-                <h3>Titre</h3>
-                <p>Lorem ipsum dolor sit amet.</p>
-              </div>
-
-              <div class="cards-row-overlay_content">
-                <i class="fa-solid fa-circle-dollar"></i>
-                300 $
-              </div>
+          <%# <%= studio.bookings.first.user.nickname %>
+          <% studio.bookings.each do |booking| %>
+            <div>
+              <p><%= booking.user.nickname  %></p>
+              <p><%= booking.user.email  %></p>
             </div>
-          </div>
-        </div>
-
-
-
-      </div>
-
-      <div class="cards-row_card col-12 col-md-4">
-        <div class="cards-row-overlay">
-          <img src="https://www.stevensegallery.com/300/200" alt="" class="cards-row_card-image">
-
-          <div class="cards-row_card-content">
-            <div class="d-flex">
-              <div>
-                <h3>Titre</h3>
-                <p>Lorem ipsum dolor sit amet.</p>
-              </div>
-
-              <div class="cards-row-overlay_content">
-                <i class="fa-solid fa-circle-dollar"></i>
-                300 $
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-      </div>
-
-      <div class="cards-row_card col-12 col-md-4">
-        <div class="cards-row-overlay">
-          <img src="https://www.stevensegallery.com/300/200" alt="" class="cards-row_card-image">
-
-          <div class="cards-row_card-content">
-            <div class="d-flex">
-              <div>
-                <h3>Titre</h3>
-                <p>Lorem ipsum dolor sit amet.</p>
-              </div>
-
-              <div class="cards-row-overlay_content">
-                <i class="fa-solid fa-circle-dollar"></i>
-                300 $
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-      </div>
-
-
-      <div class="cards-row_card col-12 col-md-4">
-        <div class="cards-row-overlay">
-          <img src="https://www.stevensegallery.com/300/200" alt="" class="cards-row_card-image">
-
-          <div class="cards-row_card-content">
-            <div class="d-flex">
-              <div>
-                <h3>Titre</h3>
-                <p>Lorem ipsum dolor sit amet.</p>
-              </div>
-
-              <div class="cards-row-overlay_content">
-                <i class="fa-solid fa-circle-dollar"></i>
-                300 $
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-      </div>
-
-    </section>
-
-    <h2 class="text-center">Mes résas</h2>
-
+          <% end %>
+      <% end %>
+    </div>
   </div>
-
 </div>
