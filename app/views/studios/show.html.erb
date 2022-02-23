@@ -2,21 +2,24 @@
   <div class="container">
     <h1><%= @studio.title %></h1>
     <h1>Owner: <%= @studio.user.nickname %></h1>
-    <img class="avatar" src="<%=@studio.user.photo_id_url%>" alt="">
+    <img class="avatar-show" src="<%=@studio.user.photo_id_url%>" alt="">
   </div>
 </div>
 
 <%# --------- SEULEMENT LE PROPRIETAIRE DU STUDIO VOIT LES BOOKINGS --------- %>
 <%if  @studio.user == current_user %>
   <% @studio.bookings.each do |booking| %>
-     <h1 style="color:black;"> You have a booking from <%= booking.user.nickname %></h1>
+    <div class="card-booking">
+      <h3 style="color:black;"> You have a booking from <%= booking.user.nickname %></h3>
+    </div>
   <% end%>
+
 <%end %>
 
 
 <div class="studioinfos">
-  <h1 class="d-flex justify-content-center"> <strong> <%= @studio.title %></strong></h1>
-  <p class="d-flex justify-content-center mt-5"> <%= @studio.description %></p>
+  <h2 class="d-flex justify-content-center"> <strong> <%= @studio.title %></strong></h2>
+  <p class="d-flex justify-content-center mt-3"> <%= @studio.description %></p>
 </div>
 
 <% if @studio.photos.length > 1%>
@@ -30,7 +33,7 @@
       <div class="carousel-inner">
         <% @studio.photos.each do |photo| %>
             <div class="carousel-item <%= 'active' if @studio.photos.index(photo) == 0 %>">
-              <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+              <%= cl_image_tag photo.key, class: 'w-100' %>
             </div>
           <% end %>
       </div>

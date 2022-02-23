@@ -112,3 +112,23 @@
 .card-product .card-product-infos {
   padding: 16px;
 }
+
+.card-booking {
+  background-color: gray;
+  height: 30px;
+  margin-left: 10px;
+  margin-bottom: 4px;
+  border-radius: 5px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  h3 {
+    font-size: 12px !important;
+    margin-bottom: 0;
+  }
+  &:hover {
+    opacity: 1;
+  }
+}
