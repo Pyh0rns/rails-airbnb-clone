@@ -3,6 +3,7 @@
     <h1><%= @studio.title %></h1>
     <h1>Owner: <%= @studio.user.nickname %></h1>
     <img class="avatar-show" src="<%=@studio.user.photo_id_url%>" alt="">
+    <%= link_to 'Visit Profil', profile_path(@studio.user.id), class:"btn btn-blue" %>
   </div>
 </div>
 
