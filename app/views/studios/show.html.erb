@@ -30,7 +30,7 @@
       <div class="carousel-inner">
         <% @studio.photos.each do |photo| %>
             <div class="carousel-item <%= 'active' if @studio.photos.index(photo) == 0 %>">
-              <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+              <%= cl_image_tag photo.key, class: 'w-100' %>
             </div>
           <% end %>
       </div>
