@@ -32,7 +32,11 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     authorize @booking
     @booking.destroy
-    redirect_to profile_path(current_user)
+    if current_user == @booking.user
+      redirect_to profile_path(@booking.studio.user)
+    else
+      redirect_to profile_path(current_user)
+    end
   end
 
   private
