@@ -25,7 +25,10 @@ gem 'jbuilder', '~> 2.7'
 
 #gem pundit
 gem 'pundit'
+#gem geocoder
 gem "geocoder"
+#gem pg_search
+gem 'pg_search'
 
 
 # Use Active Storage variant

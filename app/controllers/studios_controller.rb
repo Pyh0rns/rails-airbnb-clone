@@ -11,6 +11,13 @@ class StudiosController < ApplicationController
         image_url: helpers.asset_url("logo-map.png")
       }
     end
+    # --------------------------- SEARCH ---------------------------------
+    if params[:query].present?
+      sql_query = "title ILIKE :query OR address ILIKE :query"
+      @studios = Studio.where(sql_query, query: "%#{params[:query]}%")
+    else
+      @studios = Studio.all
+    end
   end
 
   def show
@@ -21,6 +28,13 @@ class StudiosController < ApplicationController
     @average_rating = @reviews.average(:rating)
     # je teste la ligne superieure
     authorize @studio
+    # -------------------------- CALENDAR --------------------------------
+    @dates = @studio.bookings.map do |booking|
+      {
+        from: booking.start_date,
+        to: booking.end_date
+      }
+    end
   end
 
   def new

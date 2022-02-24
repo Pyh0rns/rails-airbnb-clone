@@ -11,6 +11,16 @@
 
 <%# ---------------------------- CARDS STUDIOS ------------------------------ %>
 <div class="container">
+  <div class="search-form">
+    <%= form_tag studios_path, method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Find a place to play"
+      %>
+      <%= submit_tag "Search", class: "btn btn-blue" %>
+    <% end %>
+    </div>
   <div class="cards-grid">
     <% @studios.each do |studio| %>
       <%= link_to studio_path(studio), class:"link-without-style" do  %>

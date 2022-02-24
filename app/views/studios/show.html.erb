@@ -61,13 +61,16 @@
   <%# -------- partie formulaire ------------- %>
   <div class="w-50 ms-5 me-5">
     <h2 class="text-center">Book a session </h2>
-    <p>ajouter un champ "comment" au booking</p>
-    <%= simple_form_for [@studio, @booking] do |f| %>
-      <%= f.input :start_date %>
-      <%= f.input :end_date %>
+    <%= simple_form_for [@studio, @booking], html: {data: {controller: 'flatpickr' }} do |f| %>
+    <div data-flatpickr-target= "date" data-bookings = "<%= @dates.to_json%>" ></div>
+      <%= f.input :start_date, as: :string, required: false, input_html: {data:{target: 'start_date'}, class: "datepicker"} %>
+      <%= f.input :end_date, as: :string, required: false, input_html: {data:{target: 'end_date'}, class: "datepicker", id: 'enddate'} %>
+      <%# <%= f.input :comment %>
       <%= f.submit class:"btn btn-blue mt-2 d-grid gap-2 col-6 mx-auto" %>
     <% end %>
   </div>
+
+
   <%# -------- partie bookings ------------- %>
 <%# -- SEULEMENT LE PROPRIETAIRE DU STUDIO VOIT LES BOOKINGS -- %>
   <div class="me-5 ms-5">

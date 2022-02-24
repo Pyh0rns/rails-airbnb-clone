@@ -2,6 +2,8 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 puts "start"
+puts "destroy old reviews"
+Review.destroy_all
 puts "destroy old bookings"
 Booking.destroy_all
 puts "destroy old studios"
@@ -9,10 +11,10 @@ Studio.destroy_all
 puts "destroy old users"
 User.destroy_all
 puts "create users"
-py = User.create!(email: 'py@gmail.com', password: 'azerty', nickname: "PY", photo_id_url: "https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fGZhY2V8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60")
-marin = User.create!(email: 'm@gmail.com', password: 'azerty', nickname: "Marin", photo_id_url: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fGZhY2V8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60")
-manu = User.create!(email: 'mm@gmail.com', password: 'azerty', nickname: "Manu", photo_id_url: "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmFjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60")
-felix = User.create!(email: 'f@gmail.com', password: 'azerty', nickname: "Felix", photo_id_url: "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZmFjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60")
+py = User.create!(email: 'py@gmail.com', password: 'azerty', nickname: "PY", bio: "Tv guru. Web buff. Wannabe travel expert. Unapologetic internet enthusiast. Professional food fan.", photo_id_url: "https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fGZhY2V8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60")
+marin = User.create!(email: 'm@gmail.com', password: 'azerty', nickname: "Marin", bio: "Internet ninja. Music fanatic. Typical social mediaholic. Thinker. Reader. Passionate coffee enthusiast. Alcohol aficionado.", photo_id_url: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjV8fGZhY2V8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60")
+manu = User.create!(email: 'mm@gmail.com', password: 'azerty', nickname: "Manu", bio: "Internet buff. Beer guru. Travel enthusiast. Bacon advocate. Freelance entrepreneur. Award-winning organizer.", photo_id_url: "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmFjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60")
+felix = User.create!(email: 'f@gmail.com', password: 'azerty', nickname: "Felix", bio: "Friendly twitter geek. Zombie lover. Coffee ninja. Typical tv trailblazer. Hipster-friendly internet buff. Hardcore problem solver.", photo_id_url: "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8ZmFjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60")
 
 puts "create studios"
 studio1 = Studio.create!(address: "12 rue saint sebastien, lille", title: "Crazy Metal Studio", description: "Premium studio
@@ -33,10 +35,17 @@ studio2 = Studio.create!(address: "rue du chateau, brest", title: "Reggae Master
   user_id: py.id, photo_url: "https://images.unsplash.com/photo-1574882225022-9e0e447e9662?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwc3R1ZGlvfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60")
 
 puts "create bookings"
-Booking.create!(studio_id: studio1.id, user_id: marin.id )
-Booking.create!(studio_id: studio2.id, user_id: marin.id )
-Booking.create!(studio_id: studio2.id, user_id: manu.id )
-Booking.create!(studio_id: studio3.id, user_id: py.id )
-Booking.create!(studio_id: studio3.id, user_id: felix.id )
+Booking.create!(studio_id: studio1.id, user_id: marin.id, status: "Accepted", start_date: '2022-02-27', end_date: '2022-02-28', comment: "Been here before, amazing! Cant wait to come back" )
+Booking.create!(studio_id: studio2.id, user_id: marin.id, start_date: '2022-04-28', end_date: '2022-04-29', comment: "Could you please get a couple beers in the fridge before we arrive? Thanks" )
+Booking.create!(studio_id: studio2.id, user_id: felix.id, start_date: '2022-04-28', end_date: '2022-04-29', comment: "Could you please get a couple beers in the fridge before we arrive? Thanks" )
+Booking.create!(studio_id: studio2.id, user_id: manu.id, start_date: '2022-02-27', end_date: '2022-02-29', comment: "We will arrive very early, around 06:00." )
+Booking.create!(studio_id: studio3.id, user_id: py.id, start_date: '2022-03-01', end_date: '2022-03-03', comment: "We would like to have a place to store our instruments during the night." )
+Booking.create!(studio_id: studio3.id, user_id: felix.id, start_date: '2022-03-10', end_date: '2022-03-11', comment: "Can you please get a parking spot for us, we have a big tour bus. Cheers" )
+
+puts "create reviews"
+Review.create!(comment: "horrible", rating: 1, studio_id: studio3.id, user_id: marin.id)
+Review.create!(comment: "awesome", rating: 5, studio_id: studio3.id, user_id: py.id)
+Review.create!(comment: "very nice owner", rating: 5, studio_id: studio3.id, user_id: felix.id)
+Review.create!(comment: "good place", rating: 4, studio_id: studio3.id, user_id: felix.id)
 
 puts "C'est tout bon les gars!!"
