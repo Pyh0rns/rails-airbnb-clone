@@ -16,9 +16,9 @@
 
 #map {
   position: sticky;
-  height: 50vh;
+  min-height: 50vh ;
+  // height: 100vh;
   width: 50vh;
-  margin-right: 40px;
   margin-left: 40px;
   top: 0;
 }
