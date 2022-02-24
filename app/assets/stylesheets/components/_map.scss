@@ -13,3 +13,12 @@
   border: 1px solid lightgrey;
   box-shadow: none;
 }
+
+#map {
+  position: sticky;
+  height: 50vh;
+  width: 50vh;
+  margin-right: 40px;
+  margin-left: 40px;
+  top: 0;
+}
