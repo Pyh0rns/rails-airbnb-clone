@@ -17,7 +17,7 @@ class BookingsController < ApplicationController
     authorize @booking
     @booking.status = "Accepted"
     @booking.save
-    redirect_to profile_path
+    redirect_to profile_path(current_user)
   end
 
   def decline
@@ -25,14 +25,14 @@ class BookingsController < ApplicationController
     authorize @booking
     @booking.status = "Declined"
     @booking.save
-    redirect_to profile_path
+    redirect_to profile_path(current_user)
   end
 
   def destroy
     @booking = Booking.find(params[:id])
     authorize @booking
     @booking.destroy
-    redirect_to studio_path(@booking.studio)
+    redirect_to profile_path(current_user)
   end
 
   private
