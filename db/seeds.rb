@@ -2,6 +2,8 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 puts "start"
+puts "destroy old reviews"
+Review.destroy_all
 puts "destroy old bookings"
 Booking.destroy_all
 puts "destroy old studios"
@@ -33,10 +35,17 @@ studio2 = Studio.create!(address: "rue du chateau, brest", title: "Reggae Master
   user_id: py.id, photo_url: "https://images.unsplash.com/photo-1574882225022-9e0e447e9662?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwc3R1ZGlvfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60")
 
 puts "create bookings"
-Booking.create!(studio_id: studio1.id, user_id: marin.id, start_date: '2022-02-27', end_date: '2022-02-28', comment: "Been here before, amazing! Cant wait to come back" )
+Booking.create!(studio_id: studio1.id, user_id: marin.id, status: "Accepted", start_date: '2022-02-27', end_date: '2022-02-28', comment: "Been here before, amazing! Cant wait to come back" )
 Booking.create!(studio_id: studio2.id, user_id: marin.id, start_date: '2022-04-28', end_date: '2022-04-29', comment: "Could you please get a couple beers in the fridge before we arrive? Thanks" )
+Booking.create!(studio_id: studio2.id, user_id: felix.id, start_date: '2022-04-28', end_date: '2022-04-29', comment: "Could you please get a couple beers in the fridge before we arrive? Thanks" )
 Booking.create!(studio_id: studio2.id, user_id: manu.id, start_date: '2022-02-27', end_date: '2022-02-29', comment: "We will arrive very early, around 06:00." )
 Booking.create!(studio_id: studio3.id, user_id: py.id, start_date: '2022-03-01', end_date: '2022-03-03', comment: "We would like to have a place to store our instruments during the night." )
 Booking.create!(studio_id: studio3.id, user_id: felix.id, start_date: '2022-03-10', end_date: '2022-03-11', comment: "Can you please get a parking spot for us, we have a big tour bus. Cheers" )
+
+puts "create reviews"
+Review.create!(comment: "horrible", rating: 1, studio_id: studio3.id, user_id: marin.id)
+Review.create!(comment: "awesome", rating: 5, studio_id: studio3.id, user_id: py.id)
+Review.create!(comment: "very nice owner", rating: 5, studio_id: studio3.id, user_id: felix.id)
+Review.create!(comment: "good place", rating: 4, studio_id: studio3.id, user_id: felix.id)
 
 puts "C'est tout bon les gars!!"

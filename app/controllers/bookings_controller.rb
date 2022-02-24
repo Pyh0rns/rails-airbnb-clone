@@ -1,5 +1,4 @@
 class BookingsController < ApplicationController
-
   def create
     @booking = Booking.new(booking_params)
     authorize @booking
@@ -13,20 +12,25 @@ class BookingsController < ApplicationController
     end
   end
 
-  # def accept
-  #   @booking = Booking.find(params[:id])
-  #   authorize @booking
-  # end
+  def accept
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    @booking.status = "Accepted"
+    @booking.save
+    redirect_to my_profile_path
+  end
 
-  # def decline
-  #   @booking = Booking.find(params[:id])
-  #   authorize @booking
-  #   @booking.update(booking_params)
-  #   redirect_to studios_path
-  # end
+  def decline
+    @booking = Booking.find(params[:id])
+    authorize @booking
+    @booking.status = "Declined"
+    @booking.save
+    redirect_to my_profile_path
+  end
 
   def destroy
     @booking = Booking.find(params[:id])
+    authorize @booking
     @booking.destroy
     redirect_to studio_path(@booking.studio)
   end

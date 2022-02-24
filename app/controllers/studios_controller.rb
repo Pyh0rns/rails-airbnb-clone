@@ -23,7 +23,18 @@ class StudiosController < ApplicationController
   def show
     @studio = Studio.find(params[:id])
     @booking = Booking.new
+    @review = Review.new
+    @reviews = @studio.reviews
+    @average_rating = @reviews.average(:rating)
+    # je teste la ligne superieure
     authorize @studio
+    # -------------------------- CALENDAR --------------------------------
+    @dates = @studio.bookings.map do |booking|
+      {
+        from: booking.start_date,
+        to: booking.end_date
+      }
+    end
   end
 
   def new
