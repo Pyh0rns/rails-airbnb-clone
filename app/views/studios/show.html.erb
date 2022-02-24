@@ -99,6 +99,106 @@
   </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%# ----------------------------- debut 145 reviews ----------------------------------- %>
+
+<div class="container mt-5 d-flex align-items-center justify-content-between">
+
+  <div>
+
+  <p>
+    Moyenne : <%= @average_rating %>
+  </p>
+
+    <% @reviews.each do |review| %>
+      <p>
+        <% Review::AUTHORIZED_RATINGS.each do |number| %>
+          <i class="fa<%= (number > review.rating) ? 'r' : 's' %> fa-star"></i>
+        <% end %>
+        <%= review.comment %>
+      </p>
+    <% end %>
+  </div>
+
+  <div>
+    <h2>Leave Feedback after your stay :</h2>
+    <%= simple_form_for [@studio, @review] do |f| %>
+      <%= f.input :comment %>
+      <%= f.input :rating, as: :hidden  %>
+      <div class="my-3">
+        <% Review::AUTHORIZED_RATINGS.each do |index| %>
+          <i id="<%= index %>" class="review-rating far fa-star"></i>
+        <% end %>
+      </div>
+      <%= f.submit class: "btn btn-primary", value: "Valider" %>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%# ----------------------------- fin reviews ----------------------------------- %>
+
+
+
 <%# ---------------------------- BOUTONS ET LIENS -------------------------- %>
 <div class="basdepage mt-5 ms-5">
   <p> Back Home
