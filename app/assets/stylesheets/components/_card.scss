@@ -18,6 +18,7 @@
 
 .card-category:hover{
   opacity: 1;
+  margin-top: -5px;
 }
 
 .card-studio-description {
@@ -32,7 +33,6 @@
   display: block;
   justify-content: center;
   margin: 2px;
-  overflow: scroll;
   font-size: small;
   padding: 30px;
 }
