@@ -2,7 +2,7 @@
   <div class="banner-small mb-5 profil-page-banner">
 
     <div class="container">
-      <h1> This is your Pages Hello #profile <%= @current_user.nickname %> </h1>
+      <h1> This is <%= @current_user.nickname %> profile </h1>
       <p>Music studios</p>
     </div>
       <img class="avatar-large" alt="avatar-large" src="<%= current_user.photo_id_url %>" />
@@ -37,6 +37,9 @@
             <div>
               <p><%= booking.user.nickname  %></p>
               <p><%= booking.user.email  %></p>
+              <p><%= booking.comment  %></p>
+              <p><%= booking.status  %></p>
+              <p>From: <%= booking.start_date  %> To: <%= booking.end_date  %>    </p>
             </div>
           <% end %>
       <% end %>
