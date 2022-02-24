@@ -2,6 +2,10 @@
   justify-content: space-between;
   background: black;
   height: 80px;
+  position: fixed;
+  left: auto;
+  width: 100%;
+  z-index: 1000;
 }
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;

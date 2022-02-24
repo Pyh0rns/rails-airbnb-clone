@@ -11,11 +11,27 @@
 );">
 
   <div class="container">
-    <h1><%= @studio.title %></h1>
-    <h1>Owner: <%= @studio.user.nickname %></h1>
+    <div class="d-flex align-items-center">
+
+      <div>
+        <h1 ><%= @studio.title  %></h1>
+      </div>
+
+      <div>
+        <i class="fas fa-star"></i>
+      </div>
+
+      <div>
+        <p><%= @average_rating.to_i%></p>
+      </div>
+
+    </div>
+
+    <h1>By: <%= @studio.user.nickname %></h1>
     <img class="avatar-show" src="<%=@studio.user.photo_id_url%>" alt="">
     <%= link_to 'Visit Profil', profile_path(@studio.user.id), class:"btn btn-blue" %>
   </div>
+
 </div>
 
 <%# ------------------------- TITRE ET DESCRIPTION -------------------------- %>
@@ -144,7 +160,6 @@
 
 
 
-
 <%# ----------------------------- debut 145 reviews ----------------------------------- %>
 
 <div class="container mt-5 d-flex align-items-center justify-content-between">
@@ -175,7 +190,8 @@
           <i id="<%= index %>" class="review-rating far fa-star"></i>
         <% end %>
       </div>
-      <%= f.submit class: "btn btn-primary", value: "Valider" %>
+
+      <%= f.submit class: "btn btn-blue", value: "Valider" %>
     <% end %>
   </div>
 </div>
