@@ -28,7 +28,10 @@
             <p class="card-studio-description"> <%= studio.address %> </p>
           </div>
         <% end %>
+
       <%# ---------------- bookings du studio ----------------%>
+      <%# --- seulement visible si c'est mon studio --------%>
+
         <% if current_user == @user%>
           <% studio.bookings.each do |booking| %>
             <div class="bookings-profile-card m-2 border d-flex justify-content-between">
@@ -54,6 +57,47 @@
             </div>
           <% end %>
         <% end %>
+
+
+
+
+        <%# ---------------- bookings du studio ----------------%>
+        <%# --- seulement visible si c'est mon booking --------%>
+
+        <% studio.bookings.each do |booking| %>
+          <% if current_user == booking.user %>
+            <% studio.bookings.each do |booking| %>
+              <div class="bookings-profile-card m-2 border d-flex justify-content-between">
+                <div>
+                  <p>You booked this studio</p>
+                  <p>From: <%= booking.start_date  %> To: <%= booking.end_date  %> </p>
+                  <p>Comment: <%= booking.comment  %></p>
+                  <p>This booking is: <%= booking.status  %></p>
+                </div>
+                <div>
+                  <p><%= link_to 'Delete', studio_booking_path(studio, booking), method: :delete, data: { confirm: "Are you sure?" }  %></p>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       </div>
     <% end %>
   </div>
