@@ -17,6 +17,13 @@ class StudiosController < ApplicationController
     @studio = Studio.find(params[:id])
     @booking = Booking.new
     authorize @studio
+    # -------------------------- CALENDAR --------------------------------
+    @dates = @studio.bookings.map do |booking|
+      {
+        from: booking.start_date,
+        to: booking.end_date
+      }
+    end
   end
 
   def new
