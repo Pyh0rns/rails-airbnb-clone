@@ -1,5 +1,4 @@
 class BookingsController < ApplicationController
-
   def create
     @booking = Booking.new(booking_params)
     authorize @booking
@@ -23,7 +22,6 @@ class BookingsController < ApplicationController
 
   def decline
     @booking = Booking.find(params[:id])
-    # @booking = Booking.find(params[:studio_id][:id])
     authorize @booking
     @booking.status = "Declined"
     @booking.save
@@ -35,7 +33,6 @@ class BookingsController < ApplicationController
     authorize @booking
     @booking.destroy
     redirect_to studio_path(@booking.studio)
-    # redirect_to studios_path
   end
 
   private
