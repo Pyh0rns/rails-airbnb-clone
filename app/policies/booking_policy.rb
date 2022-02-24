@@ -11,16 +11,14 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def decline?
-    #celui qui a le studio qui peut agir
-    user == record.user
+    user == record.studio.user
   end
 
   def accept?
-    #celui qui a le studio qui peut agir
-    user == record.user
+    user == record.studio.user
   end
 
   def destroy?
-    user == record.user
+    user == record.studio.user
   end
 end

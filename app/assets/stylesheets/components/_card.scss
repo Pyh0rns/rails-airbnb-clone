@@ -32,7 +32,6 @@
   display: block;
   justify-content: center;
   margin: 2px;
-  overflow: scroll;
   font-size: small;
   padding: 30px;
 }
@@ -147,4 +146,14 @@
 
 .card-profile-studio {
   border: solid;
+}
+
+.bookings-profile-card {
+  padding: 10px;
+  line-height: 3px;
+  width: 800px;
+  margin: 0 auto;
+  p {
+    font-size: 12px;
+  }
 }

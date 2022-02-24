@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 
   get '/my_profile', to: 'dashboards#my_profile'
   get 'profile/:id', to: 'dashboards#profile', as: :profile
-  patch 'bookings/:id', to: 'bookings#accept'
-  patch 'bookings/:id', to: 'bookings#decline'
+  patch 'bookings/:id', to: 'bookings#accept', as: :accept
+  patch 'bookings/:id', to: 'bookings#decline', as: :decline
 end
