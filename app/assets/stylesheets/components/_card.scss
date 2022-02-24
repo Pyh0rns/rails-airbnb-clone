@@ -37,10 +37,15 @@
   padding: 30px;
 }
 
+.card-container{
+  flex-grow: 1;
+  margin-left: 40px;
+}
+
 .cards-grid {
   margin-top: 10px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-gap: 16px;
   margin-bottom: 10px;
 }
