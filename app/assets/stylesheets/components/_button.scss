@@ -1,36 +1,59 @@
-.btn-blue {
-  border-radius: 4px;
-  background-color: $primary-color;
-  color: $secondary-color;
-}
-
-.btn-white {
-border-radius: 4px;
-background-color: $secondary-color;
-color: $primary-color;
-}
-
-.btn-transparent {
-  border-radius: 4px;
+.btn-transparent-blue {
+  border-radius: 5px;
   background-color: transparent;
   border-color: $primary-color;
   color: $primary-color;
+  text-decoration: none;
+  padding: 8px;
+  border: solid;
+  border-width: thin;
+ &:hover{
+   text-decoration: none;
+   color: $primary-color;
+ }
 }
 
-.btn-transparent:hover {
-  border-color: $secondary-color;
+.btn-transparent-white {
+  border-radius: 5px;
   background-color: transparent;
-  border-radius: 4px;
+  border-color: $secondary-color;
   color: $secondary-color;
+  text-decoration: none;
+  padding: 8px;
+  border: solid;
+  border-width: thin;
+ &:hover{
+   text-decoration: none;
+   color: $secondary-color;
+ }
 }
 
-.btn-search {
-border-radius: 4px;
-background-color: $secondary-color;
-color: $primary-color;
-position: absolute;
-justify-content: center;
-display: flex;
+.btn-blue {
+  border-radius: 5px;
+  background-color: $primary-color;
+  color: $secondary-color;
+  text-decoration: none;
+  padding: 8px;
+  border: solid;
+  border-width: thin;
+ &:hover{
+   text-decoration: none;
+   color: $secondary-color;
+ }
+}
+
+.btn-white {
+  border-radius: 5px;
+  background-color: $secondary-color;
+  color: $primary-color;
+  text-decoration: none;
+  padding: 8px;
+  border: solid;
+  border-width: thin;
+ &:hover{
+   text-decoration: none;
+   color: $primary-color;
+  }
 }
 
 .link-without-style {
