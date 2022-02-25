@@ -15,18 +15,20 @@
 
     <div class="d-flex ml-3">
     <% totalrating = 0 %>
-    <% @studio.reviews.each do |review| %>
-      <% totalrating += review.rating %>
-    <% end %>
+    <%if @studio.reviews.length >= 1 %>
+      <% @studio.reviews.each do |review| %>
+        <% totalrating += review.rating %>
+      <% end %>
 
-    <% totalrating / @studio.reviews.length.times do %>
-      <i class="fas fa-star ml-1"></i>
-    <% end %>
+      <% totalrating / @studio.reviews.length.times do %>
+        <i class="fas fa-star ml-1"></i>
+      <% end %>
 
 
-    <% if (totalrating / @studio.reviews.length) < 5 %>
-      <% (5 - @studio.reviews.length).times do %>
-        <i class="far fa-star ml-1"></i>
+      <% if (totalrating / @studio.reviews.length) < 5 %>
+        <% (5 - @studio.reviews.length).times do %>
+          <i class="far fa-star ml-1"></i>
+        <% end %>
       <% end %>
     <% end %>
     </div>
@@ -168,27 +170,36 @@
 
 <%# ----------------------------- debut 145 reviews ----------------------------------- %>
 
-<div class="container mt-5 d-flex align-items-center justify-content-between">
+<div class="container mt-5">
 
-  <div>
+  <div class="d-flex align-items-center justify-content-between">
 
-  <p>
-    Moyenne : <%= @average_rating %>
-  </p>
 
-    <% @reviews.each do |review| %>
-      <p>
-        <% Review::AUTHORIZED_RATINGS.each do |number| %>
-          <i class="fa<%= (number > review.rating) ? 'r' : 's' %> fa-star"></i>
+
+
+      <div>
+      <% if @studio.reviews.blank? %>
+      <p></p>
+      <% else %>
+      <p>Moyenne : <%= @average_rating %></p>
+      <% end %>
+        <% @reviews.each do |review| %>
+        <%= link_to profile_path(review.user.id) do %>
+          <img class="avatar-square" src="<%=review.user.photo_id_url%>" alt="">
         <% end %>
-        <%= review.comment %>
-      </p>
+        <p>
+          <% Review::AUTHORIZED_RATINGS.each do |number| %>
+            <i class="fa<%= (number > review.rating) ? 'r' : 's' %> fa-star"></i>
+          <% end %>
+          <%= review.comment %>
+        </p>
     <% end %>
-  </div>
+    </div>
 
-  <div>
-    <h2>Leave Feedback after your stay :</h2>
-    <%= simple_form_for [@studio, @review] do |f| %>
+
+    <div class="w-50">
+      <h2>Leave Feedback after your stay :</h2>
+      <%= simple_form_for [@studio, @review] do |f| %>
       <%= f.input :comment %>
       <%= f.input :rating, as: :hidden  %>
       <div class="my-3">
@@ -196,9 +207,11 @@
           <i id="<%= index %>" class="review-rating far fa-star"></i>
         <% end %>
       </div>
-
       <%= f.submit class: "btn btn-blue", value: "Valider" %>
-    <% end %>
+        <% end %>
+    </div>
+
+
   </div>
 </div>
 
