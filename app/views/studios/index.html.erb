@@ -9,20 +9,24 @@
 <%# ---------------------------- Search BAR------------------------------ %>
 <div class="container">
   <div class="m-5">
-    <div class="search-form">
-      <%= form_tag studios_path, method: :get do %>
+    <div>
+      <%= form_tag studios_path, class:"input-group", method: :get do %>
         <%= text_field_tag :query,
           params[:query],
           class: "form-control mb-3",
           placeholder: "Find a place to play"
         %>
-        <%= submit_tag "Search", class: "btn btn-blue" %>
+      <div class="input-group-append" style="width: 90%" >
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
       <% end %>
     </div>
 
     <%# ---------------------------- CARDS STUDIOS ------------------------------ %>
 
-    <div class="d-flex" style="height: 0">
+    <div class="d-flex" >
       <div class="cards-grid">
         <% @studios.each do |studio| %>
           <%= link_to studio_path(studio), class:"link-without-style" do  %>
@@ -51,3 +55,4 @@
       </div>
     </div>
   </div>
+</div>
