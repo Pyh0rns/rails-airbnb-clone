@@ -1,23 +1,41 @@
 <div class="banner-small mb-5"
-<%# banner: soit photo cloudinary, soit photo_url seed soit photo par defaut %>
-  <% if @studio.photo_url.nil? && @studio.photos.attached? %>
-    <% url = cl_image_path @studio.photos.first.key %>
-  <% elsif @studio.photo_url.nil? && !@studio.photos.attached? %>
-    <% url = "https://images.ctfassets.net/anpxw7hl9rcg/6i3V4opLFffyrrG6WoCYsP/f9fdb70e292ce2969d8021a0632afb82/_10_gargolandia.jpg"%>
-  <% else  %>
-    <% url = @studio.photo_url %>
-  <% end %>
- style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= url %>
-);">
+  <%# banner: soit photo cloudinary, soit photo_url seed soit photo par defaut %>
+    <% if @studio.photo_url.nil? && @studio.photos.attached? %>
+      <% url = cl_image_path @studio.photos.first.key %>
+    <% elsif @studio.photo_url.nil? && !@studio.photos.attached? %>
+      <% url = "https://images.ctfassets.net/anpxw7hl9rcg/6i3V4opLFffyrrG6WoCYsP/f9fdb70e292ce2969d8021a0632afb82/_10_gargolandia.jpg"%>
+    <% else  %>
+      <% url = @studio.photo_url %>
+    <% end %>
+      style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= url %>);">
 
-  <div class="container">
-    <h1><%= @studio.title %></h1>
-    <h1>Owner: <%= @studio.user.nickname %></h1>
+<div class="container">
+  <div class="d-flex justify-content-start align-items-center">
+    <h1><%= @studio.title  %></h1>
+
+    <div class="d-flex ml-3">
+    <% totalrating = 0 %>
+    <% @studio.reviews.each do |review| %>
+      <% totalrating += review.rating %>
+    <% end %>
+
+    <% totalrating / @studio.reviews.length.times do %>
+      <i class="fas fa-star ml-1"></i>
+    <% end %>
+
+
+    <% if (totalrating / @studio.reviews.length) < 5 %>
+      <% (5 - @studio.reviews.length).times do %>
+        <i class="far fa-star ml-1"></i>
+      <% end %>
+    <% end %>
+    </div>
+    </div>
+    <h1>By: <%= @studio.user.nickname %></h1>
     <img class="avatar-show" src="<%=@studio.user.photo_id_url%>" alt="">
     <%= link_to 'Visit Profil', profile_path(@studio.user.id), class:"btn btn-blue" %>
-  </div>
 </div>
-
+</div>
 <%# ------------------------- TITRE ET DESCRIPTION -------------------------- %>
 <div class="container">
   <div class="studioinfos">
@@ -104,7 +122,51 @@
 </div>
 
 
-<%# ----------------------------- debut reviews ----------------------------------- %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%# ----------------------------- debut 145 reviews ----------------------------------- %>
 
 <div class="container mt-5 d-flex align-items-center justify-content-between">
 
@@ -134,7 +196,8 @@
           <i id="<%= index %>" class="review-rating far fa-star"></i>
         <% end %>
       </div>
-      <%= f.submit class: "btn btn-primary", value: "Valider" %>
+
+      <%= f.submit class: "btn btn-blue", value: "Valider" %>
     <% end %>
   </div>
 </div>
