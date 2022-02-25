@@ -11,7 +11,7 @@
 
 <div class="container">
   <div class="d-flex justify-content-start align-items-center">
-    <h1><%= @studio.title  %></h1>
+    <h1 class="me-2"><%= @studio.title  %></h1>
 
     <div class="d-flex ml-3">
     <% @totalrating = 0 %>
@@ -22,7 +22,6 @@
 
       <% @average2 = (@totalrating.fdiv(@studio.reviews.length)).round(1) %>
       <% @average = @totalrating / @studio.reviews.length %>
-      <%# <% @average2 = @average.round(2) %> %>
       <% @average.round.times do %>
         <i class="fas fa-star ml-1"></i>
       <% end %>
