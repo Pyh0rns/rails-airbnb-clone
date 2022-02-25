@@ -1,24 +1,11 @@
-<div class="banner-small mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1518972559570-7cc1309f3229?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);">
-  <div class="container">
-    <h1>Create a new studio</h1>
-    <p>Let's play music !</p>
-  </div>
-</div>
-
-
-
-
-
-
-<div class="container">
   <%= simple_form_for @studio do |f| %>
     <%= f.input :title %>
-    <%= f.input :description %>
+    <%= f.input :description, input_html: {class:"input"} %>
     <%= f.input :address,
         input_html: { data: { geocoder_target: "address" }, class: "d-none" },
         wrapper_html: { data: { controller: "geocoder", geocoder_api_key_value: ENV['MAPBOX_API_KEY'] } } %>
     <%= f.input :price %>
     <%= f.input :photos, as: :file, input_html: { multiple: true }%>
     <%= f.input :available %>
-    <%= f.button :submit, class: "btn btn-blue"%></div>
+    <%= f.button :submit, class: "btn btn-blue"%>
   <% end %>

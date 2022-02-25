@@ -1,6 +1,13 @@
+<div class="banner-small mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1518972559570-7cc1309f3229?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80);">
+  <div class="banner-content" style="padding-left: 75px">
+    <h1>Create a new studio</h1>
+    <p>Let's play music !</p>
+    <%= link_to 'Back to index', studios_path, class:"linkto btn-transparent-white" %>
+  </div>
+</div>
 
-<div class="container">
-  <%= render 'form', studio: @studio %>
-
-  <%= link_to 'Back to index', studios_path, class:"mt-3 btn btn-white ms-2" %>
+<div class="container d-flex justify-content-center">
+  <div class="form">
+    <%= render 'form', studio: @studio %>
+  </div>
 </div>
