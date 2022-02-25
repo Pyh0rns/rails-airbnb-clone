@@ -1,39 +1,41 @@
 <div class="banner-small mb-5"
-<%# banner: soit photo cloudinary, soit photo_url seed soit photo par defaut %>
-  <% if @studio.photo_url.nil? && @studio.photos.attached? %>
-    <% url = cl_image_path @studio.photos.first.key %>
-  <% elsif @studio.photo_url.nil? && !@studio.photos.attached? %>
-    <% url = "https://images.ctfassets.net/anpxw7hl9rcg/6i3V4opLFffyrrG6WoCYsP/f9fdb70e292ce2969d8021a0632afb82/_10_gargolandia.jpg"%>
-  <% else  %>
-    <% url = @studio.photo_url %>
-  <% end %>
- style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= url %>
-);">
+  <%# banner: soit photo cloudinary, soit photo_url seed soit photo par defaut %>
+    <% if @studio.photo_url.nil? && @studio.photos.attached? %>
+      <% url = cl_image_path @studio.photos.first.key %>
+    <% elsif @studio.photo_url.nil? && !@studio.photos.attached? %>
+      <% url = "https://images.ctfassets.net/anpxw7hl9rcg/6i3V4opLFffyrrG6WoCYsP/f9fdb70e292ce2969d8021a0632afb82/_10_gargolandia.jpg"%>
+    <% else  %>
+      <% url = @studio.photo_url %>
+    <% end %>
+      style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= url %>);">
 
-  <div class="container">
-    <div class="d-flex align-items-center">
+<div class="container">
+  <div class="d-flex justify-content-start align-items-center">
+    <h1><%= @studio.title  %></h1>
 
-      <div>
-        <h1 ><%= @studio.title  %></h1>
-      </div>
+    <div class="d-flex ml-3">
+    <% totalrating = 0 %>
+    <% @studio.reviews.each do |review| %>
+      <% totalrating += review.rating %>
+    <% end %>
 
-      <div>
-        <i class="fas fa-star"></i>
-      </div>
+    <% totalrating / @studio.reviews.length.times do %>
+      <i class="fas fa-star ml-1"></i>
+    <% end %>
 
-      <div>
-        <p><%= @average_rating.to_i%></p>
-      </div>
 
+    <% if (totalrating / @studio.reviews.length) < 5 %>
+      <% (5 - @studio.reviews.length).times do %>
+        <i class="far fa-star ml-1"></i>
+      <% end %>
+    <% end %>
     </div>
-
+    </div>
     <h1>By: <%= @studio.user.nickname %></h1>
     <img class="avatar-show" src="<%=@studio.user.photo_id_url%>" alt="">
     <%= link_to 'Visit Profil', profile_path(@studio.user.id), class:"btn btn-blue" %>
-  </div>
-
 </div>
-
+</div>
 <%# ------------------------- TITRE ET DESCRIPTION -------------------------- %>
 <div class="container">
   <div class="studioinfos">
@@ -73,7 +75,7 @@
 </div>
 
 <%# --------------------------- FORM BOOKING STUDIO ------------------------- %>
-<div class="container mt-5 d-flex align-items-center justify-content-between">
+<div class="container p-5 d-flex align-items-center justify-content-between border m-5">
   <%# -------- partie formulaire ------------- %>
   <div class="w-50 ms-5 me-5">
     <h2 class="text-center">Book a session </h2>
@@ -195,20 +197,6 @@
     <% end %>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <%# ----------------------------- fin reviews ----------------------------------- %>

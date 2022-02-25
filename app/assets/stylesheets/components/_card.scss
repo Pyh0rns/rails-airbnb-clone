@@ -14,10 +14,14 @@
   text-decoration: none;
   opacity: 0.8;
   transition: 0.4s ease-out;
+  h2 {
+    font-size: 20px;
+  }
 }
 
 .card-category:hover{
   opacity: 1;
+  margin-top: -5px;
 }
 
 .card-studio-description {
@@ -37,12 +41,15 @@
 }
 
 .cards-grid {
+  flex-grow: 1;
   margin-top: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
   margin-bottom: 10px;
+  width: 100%;
 }
+
 
 // Smallest device
 @media (min-width: 100px) and (max-width: 575px) {
@@ -122,6 +129,8 @@
 .card-product .card-product-infos {
   padding: 16px;
 }
+
+// ---------------- profile.html et show.html --------------
 
 .card-booking {
   background-color: gray;
