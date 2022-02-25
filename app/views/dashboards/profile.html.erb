@@ -11,7 +11,7 @@
 <%# --------------------liste des studios----------------------------------- %>
   <div class="container">
     <% @user.studios.each do |studio| %>
-      <div class="m-5">
+      <div class="m-5 border">
       <%# ---------------- image de la card ----------------%>
         <%= link_to studio_path(studio), class:"link-without-style" do  %>
           <% if studio.photo_url.nil? && studio.photos.attached? %>
@@ -72,7 +72,14 @@
         <% studio.bookings.each do |booking| %>
           <% if current_user == booking.user %>
             <% studio.bookings.each do |booking| %>
-              <div class="bookings-profile-card m-2 border d-flex justify-content-between">
+            <% if booking.status ==  "Accepted" %>
+              <% color="background-color:#B7E4C7;" %>
+            <% elsif booking.status ==  "Declined" %>
+              <% color="background-color:#F4978E;" %>
+            <% else %>
+              <% color="background-color:#BCB8B1;" %>
+            <% end %>
+              <div class="bookings-profile-card m-2 border d-flex justify-content-between" style="<%= color %>">
                 <div>
                   <p>You booked this studio</p>
                   <p>From: <%= booking.start_date  %> To: <%= booking.end_date  %> </p>
