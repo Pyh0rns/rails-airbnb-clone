@@ -6,8 +6,6 @@
     </div>
     <img class="avatar-large" alt="avatar-large" src="<%= @user.photo_id_url %>" />
   </div>
-
-
   <div style="margin:0 auto;" class=" d-flex justify-content-center">
     <p class="mt-4"><%= @user.bio %></p>
   </div>
@@ -59,13 +57,7 @@
                     <p> <%= link_to decline_path(booking), remote: true, class:"link_to", method: :patch do %><i class="fas fa-times"></i></p><% end %>
                     <p><%= link_to studio_booking_path(studio), remote: true, class:"link_to", method: :delete, data: { confirm: "Are you sure?" } do %><i class="fas fa-trash-alt"></i></p><% end %>
                   <% elsif booking.status == "Accepted" %>
-
-
-
-
                     <p> <%= link_to decline_path(booking), remote: true, class:"link_to", method: :patch do %><i class="fas fa-times"></i></p><% end %>
-
-
                     <p><%= link_to studio_booking_path(studio, booking), remote: true,class:"link_to", method: :delete, data: { confirm: "Are you sure?" } do %><i class="fas fa-trash-alt"></i></p><% end %>
                   <% else %>
                     <p> <%= link_to accept_path(booking), remote: true, class:"link_to", method: :patch do %> <i class="fas fa-check"></i></p><% end %>

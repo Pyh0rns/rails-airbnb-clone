@@ -6,7 +6,6 @@ class BookingsController < ApplicationController
     @booking.studio = @studio
     @booking.user_id = current_user.id
 
-    # current_user != @booking.studio.user
     if @booking.save
       redirect_to studio_path(@studio)
     else
