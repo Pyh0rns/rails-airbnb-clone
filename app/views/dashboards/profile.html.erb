@@ -11,7 +11,7 @@
 <%# --------------------liste des studios----------------------------------- %>
   <div class="container">
     <% @user.studios.each do |studio| %>
-      <div class="m-5">
+      <div class="m-5 border">
       <%# ---------------- image de la card ----------------%>
         <%= link_to studio_path(studio), class:"link-without-style" do  %>
           <% if studio.photo_url.nil? && studio.photos.attached? %>
@@ -23,7 +23,7 @@
           <% end %>
       <%# ---------------- contenu de la card ----------------%>
 
-          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= url %>)">
+          <div class="card-category mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= url %>)">
             <h2 class="title-studio-card" > <%= studio.title %> </h2>
             <p class="card-studio-description"> <%= studio.address %> </p>
           </div>
@@ -31,28 +31,36 @@
 
       <%# ---------------- bookings du studio ----------------%>
       <%# --- seulement visible si c'est mon studio --------%>
-
         <% if current_user == @user%>
           <% studio.bookings.each do |booking| %>
-            <div class="bookings-profile-card m-2 border d-flex justify-content-between">
-              <div>
-                <p>Booking from: <%= booking.user.nickname %>  || email: <%= booking.user.email  %></p>
-                <p>From: <%= booking.start_date  %> To: <%= booking.end_date  %> </p>
-                <p>Comment: <%= booking.comment  %></p>
-                <p>This booking is: <%= booking.status  %></p>
-              </div>
-              <div>
-                <% if booking.status == "Pending" %>
-                  <p> <%= link_to 'Accept', accept_path(booking), method: :patch %> </p>
-                  <p> <%= link_to 'Decline', decline_path(booking), method: :patch %> </p>
-                  <p><%= link_to 'Delete', studio_booking_path(studio, booking), method: :delete, data: { confirm: "Are you sure?" }  %></p>
-                <% elsif booking.status == "Accepted" %>
-                  <p> <%= link_to 'Change & decline', decline_path(booking), method: :patch %> </p>
-                  <p><%= link_to 'Delete', studio_booking_path(studio, booking), method: :delete, data: { confirm: "Are you sure?" }  %></p>
-                <% else %>
-                  <p> <%= link_to 'Change & accept', accept_path(booking), method: :patch %> </p>
-                  <p><%= link_to 'Delete', studio_booking_path(studio, booking), method: :delete, data: { confirm: "Are you sure?" }  %></p>
-                <% end %>
+            <% if booking.status ==  "Accepted" %>
+              <% color="background-color:#B7E4C7;" %>
+            <% elsif booking.status ==  "Declined" %>
+              <% color="background-color:#F4978E;" %>
+            <% else %>
+              <% color="background-color:#BCB8B1;" %>
+            <% end %>
+            <div class="bookings-all-cards ms-3">
+              <div class="bookings-profile-card m-2 d-flex justify-content-between" style="<%= color %>">
+                <div class="pt-3">
+                  <p>Booking from: <%= booking.user.nickname %>  || email: <%= booking.user.email  %></p>
+                  <p>From: <%= booking.start_date  %> To: <%= booking.end_date  %> </p>
+                  <p>Comment: <%= booking.comment  %></p>
+                  <p>This booking is: <%= booking.status  %></p>
+                </div>
+                <div>
+                  <% if booking.status == "Pending" %>
+                    <p> <%= link_to accept_path(booking), class:"link_to", method: :patch do %> <i class="fas fa-check"></i></p><% end %>
+                    <p> <%= link_to decline_path(booking), class:"link_to", method: :patch do %><i class="fas fa-times"></i></p><% end %>
+                    <p><%= link_to studio_booking_path(studio, booking), class:"link_to", method: :delete, data: { confirm: "Are you sure?" } do %><i class="fas fa-trash-alt"></i></p><% end %>
+                  <% elsif booking.status == "Accepted" %>
+                    <p> <%= link_to decline_path(booking), class:"link_to", method: :patch do %><i class="fas fa-times"></i></p><% end %>
+                    <p><%= link_to studio_booking_path(studio, booking), class:"link_to", method: :delete, data: { confirm: "Are you sure?" } do %><i class="fas fa-trash-alt"></i></p><% end %>
+                  <% else %>
+                    <p> <%= link_to accept_path(booking), class:"link_to", method: :patch do %> <i class="fas fa-check"></i></p><% end %>
+                    <p><%= link_to studio_booking_path(studio, booking), class:"link_to", method: :delete, data: { confirm: "Are you sure?" } do %><i class="fas fa-trash-alt"></i></p><% end %>
+                  <% end %>
+                </div>
               </div>
             </div>
           <% end %>
@@ -64,7 +72,14 @@
         <% studio.bookings.each do |booking| %>
           <% if current_user == booking.user %>
             <% studio.bookings.each do |booking| %>
-              <div class="bookings-profile-card m-2 border d-flex justify-content-between">
+            <% if booking.status ==  "Accepted" %>
+              <% color="background-color:#B7E4C7;" %>
+            <% elsif booking.status ==  "Declined" %>
+              <% color="background-color:#F4978E;" %>
+            <% else %>
+              <% color="background-color:#BCB8B1;" %>
+            <% end %>
+              <div class="bookings-profile-card m-2 border d-flex justify-content-between" style="<%= color %>">
                 <div>
                   <p>You booked this studio</p>
                   <p>From: <%= booking.start_date  %> To: <%= booking.end_date  %> </p>
