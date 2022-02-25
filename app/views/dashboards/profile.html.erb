@@ -98,7 +98,7 @@
                   <p>This booking is: <%= booking.status  %></p>
                 </div>
                 <div>
-                  <p><%= link_to 'Delete', studio_booking_path(studio, booking), method: :delete, data: { confirm: "Are you sure?" }  %></p>
+                  <p><%= link_to studio_booking_path(studio, booking), remote: true, class:"link_to", method: :delete, data: { confirm: "Are you sure?" } do %><i class="fas fa-trash-alt"></i></p><% end %>
                 </div>
               </div>
             <% end %>
