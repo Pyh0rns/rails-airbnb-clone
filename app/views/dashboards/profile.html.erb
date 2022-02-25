@@ -50,6 +50,7 @@
                   <p>Booking from: <%= booking.user.nickname %>  || email: <%= booking.user.email  %></p>
                   <p>From: <%= booking.start_date  %> To: <%= booking.end_date  %> </p>
                   <p>Comment: <%= booking.comment  %></p>
+                  <p><%= booking.studio.price %>€/day for <%= (booking.end_date - booking.start_date).to_i %> days = <%= (booking.end_date - booking.start_date).to_i * booking.studio.price %>€</p>
                   <p>This booking is: <%= booking.status  %></p>
                 </div>
                 <div>
