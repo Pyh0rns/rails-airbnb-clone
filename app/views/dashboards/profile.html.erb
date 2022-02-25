@@ -2,9 +2,13 @@
   <div class="banner-small mb-5 profil-page-banner">
     <div class="banner-content" style="padding-left: 75px">
       <h1> This is <%= @user.nickname %> profile </h1>
+
       <p>Music studios</p>
     </div>
     <img class="avatar-large" alt="avatar-large" src="<%= @user.photo_id_url %>" />
+  </div>
+  <div style="margin:0 auto;" class=" d-flex justify-content-center">
+    <p class="mt-4"><%= @user.bio %></p>
   </div>
 
 
@@ -32,7 +36,7 @@
       <%# ---------------- bookings du studio ----------------%>
       <%# --- seulement visible si c'est mon studio --------%>
         <% if current_user == @user%>
-          <% studio.bookings.each do |booking| %>
+          <% studio.bookings.order(:user_id).each do |booking| %>
             <% if booking.status ==  "Accepted" %>
               <% color="background-color:#B7E4C7;" %>
             <% elsif booking.status ==  "Declined" %>
@@ -40,9 +44,9 @@
             <% else %>
               <% color="background-color:#BCB8B1;" %>
             <% end %>
-            <div class="bookings-all-cards ms-3">
+            <div class="ms-3">
               <div class="bookings-profile-card m-2 d-flex justify-content-between" style="<%= color %>">
-                <div class="pt-3">
+                <div class="pt-3" id="booking-<%= booking.id %>">
                   <p>Booking from: <%= booking.user.nickname %>  || email: <%= booking.user.email  %></p>
                   <p>From: <%= booking.start_date  %> To: <%= booking.end_date  %> </p>
                   <p>Comment: <%= booking.comment  %></p>
@@ -50,15 +54,15 @@
                 </div>
                 <div>
                   <% if booking.status == "Pending" %>
-                    <p> <%= link_to accept_path(booking), class:"link_to", method: :patch do %> <i class="fas fa-check"></i></p><% end %>
-                    <p> <%= link_to decline_path(booking), class:"link_to", method: :patch do %><i class="fas fa-times"></i></p><% end %>
-                    <p><%= link_to studio_booking_path(studio, booking), class:"link_to", method: :delete, data: { confirm: "Are you sure?" } do %><i class="fas fa-trash-alt"></i></p><% end %>
+                    <p> <%= link_to accept_path(booking), remote: true, class:"link_to", method: :patch do %> <i class="fas fa-check"></i></p><% end %>
+                    <p> <%= link_to decline_path(booking), remote: true, class:"link_to", method: :patch do %><i class="fas fa-times"></i></p><% end %>
+                    <p><%= link_to studio_booking_path(studio), remote: true, class:"link_to", method: :delete, data: { confirm: "Are you sure?" } do %><i class="fas fa-trash-alt"></i></p><% end %>
                   <% elsif booking.status == "Accepted" %>
-                    <p> <%= link_to decline_path(booking), class:"link_to", method: :patch do %><i class="fas fa-times"></i></p><% end %>
-                    <p><%= link_to studio_booking_path(studio, booking), class:"link_to", method: :delete, data: { confirm: "Are you sure?" } do %><i class="fas fa-trash-alt"></i></p><% end %>
+                    <p> <%= link_to decline_path(booking), remote: true, class:"link_to", method: :patch do %><i class="fas fa-times"></i></p><% end %>
+                    <p><%= link_to studio_booking_path(studio, booking), remote: true,class:"link_to", method: :delete, data: { confirm: "Are you sure?" } do %><i class="fas fa-trash-alt"></i></p><% end %>
                   <% else %>
-                    <p> <%= link_to accept_path(booking), class:"link_to", method: :patch do %> <i class="fas fa-check"></i></p><% end %>
-                    <p><%= link_to studio_booking_path(studio, booking), class:"link_to", method: :delete, data: { confirm: "Are you sure?" } do %><i class="fas fa-trash-alt"></i></p><% end %>
+                    <p> <%= link_to accept_path(booking), remote: true, class:"link_to", method: :patch do %> <i class="fas fa-check"></i></p><% end %>
+                    <p><%= link_to studio_booking_path(studio, booking), remote: true, class:"link_to", method: :delete, data: { confirm: "Are you sure?" } do %><i class="fas fa-trash-alt"></i></p><% end %>
                   <% end %>
                 </div>
               </div>
@@ -87,7 +91,7 @@
                   <p>This booking is: <%= booking.status  %></p>
                 </div>
                 <div>
-                  <p><%= link_to 'Delete', studio_booking_path(studio, booking), method: :delete, data: { confirm: "Are you sure?" }  %></p>
+                  <p><%= link_to studio_booking_path(studio, booking), remote: true, class:"link_to", method: :delete, data: { confirm: "Are you sure?" } do %><i class="fas fa-trash-alt"></i></p><% end %>
                 </div>
               </div>
             <% end %>

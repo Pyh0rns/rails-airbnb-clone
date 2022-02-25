@@ -42,6 +42,20 @@
               <p class="card-studio-description"> <%= studio.address %> </p>
             </div>
           <% end %>
+
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= url %>)">
+            <div class="title-studio-card">
+              <h2 > <%= studio.title %> </h2>
+            </div>
+
+            <div class="card-studio-description">
+              <p class="address"><%= studio.address %></p>
+              <div class="d-flex justify-content-between mt-auto">
+                <p> <strong> <%= studio.user.nickname %> </strong></p>
+                <p><%= studio.price%> €/day</p>
+              </div>
+            </div>
+          </div>
         <% end %>
       </div>
 

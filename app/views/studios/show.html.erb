@@ -1,22 +1,44 @@
 <div class="banner-small mb-5"
-<%# banner: soit photo cloudinary, soit photo_url seed soit photo par defaut %>
-  <% if @studio.photo_url.nil? && @studio.photos.attached? %>
-    <% url = cl_image_path @studio.photos.first.key %>
-  <% elsif @studio.photo_url.nil? && !@studio.photos.attached? %>
-    <% url = "https://images.ctfassets.net/anpxw7hl9rcg/6i3V4opLFffyrrG6WoCYsP/f9fdb70e292ce2969d8021a0632afb82/_10_gargolandia.jpg"%>
-  <% else  %>
-    <% url = @studio.photo_url %>
-  <% end %>
- style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= url %>
-);">
+  <%# banner: soit photo cloudinary, soit photo_url seed soit photo par defaut %>
+    <% if @studio.photo_url.nil? && @studio.photos.attached? %>
+      <% url = cl_image_path @studio.photos.first.key %>
+    <% elsif @studio.photo_url.nil? && !@studio.photos.attached? %>
+      <% url = "https://images.ctfassets.net/anpxw7hl9rcg/6i3V4opLFffyrrG6WoCYsP/f9fdb70e292ce2969d8021a0632afb82/_10_gargolandia.jpg"%>
+    <% else  %>
+      <% url = @studio.photo_url %>
+    <% end %>
+      style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= url %>);">
 
-  <div class="container">
-    <h1><%= @studio.title %></h1>
-    <h1>Owner: <%= @studio.user.nickname %></h1>
+<div class="container">
+  <div class="d-flex justify-content-start align-items-center">
+    <h1 class="me-2"><%= @studio.title  %></h1>
+
+    <div class="d-flex ml-3">
+    <% @totalrating = 0 %>
+    <%if @studio.reviews.length >= 1 %>
+      <% @studio.reviews.each do |review| %>
+        <% @totalrating += review.rating %>
+      <% end %>
+
+      <% @average2 = (@totalrating.fdiv(@studio.reviews.length)).round(1) %>
+      <% @average = @totalrating / @studio.reviews.length %>
+      <% @average.round.times do %>
+        <i class="fas fa-star ml-1"></i>
+      <% end %>
+      <% if (@average) < 5 %>
+        <% (5 - @average.round).times do %>
+          <i class="far fa-star ml-1"></i>
+        <% end %>
+      <% end %>
+    <% end %>
+    </div>
+    </div>
+    <h1>By: <%= @studio.user.nickname %></h1>
     <img class="avatar-show" src="<%=@studio.user.photo_id_url%>" alt="">
     <%= link_to 'Visit Profil', profile_path(@studio.user.id), class:"btn btn-blue" %>
-  </div>
 </div>
+</div>
+
 
 <%# ------------------------- TITRE ET DESCRIPTION -------------------------- %>
 <div class="container">
@@ -79,12 +101,13 @@
 <%# -- SEULEMENT LE PROPRIETAIRE DU STUDIO VOIT LES BOOKINGS -- %>
   <div class="me-5 ms-5">
     <%if  @studio.user == current_user %>
-    <p>You have <%= @studio.bookings.length %> bookings pending</p>
+    <p>You have <%= @studio.bookings.length %> bookings for this studio</p>
       <% @studio.bookings.each do |booking| %>
-      <%# mettre un link_to vers son profile id pour pouvoir gerer les notifs  %>
-        <div class="card-booking">
-          <h3 style="color:black;"> You have a booking from <%= booking.user.nickname %></h3>
-        </div>
+        <%= link_to profile_path(current_user), style:"text-decoration:none;" do %>
+          <div class="card-booking">
+            <h3 style="color:black;"> You have a booking from <%= booking.user.nickname %></h3>
+          </div>
+        <% end %>
       <% end%>
     <%end %>
   </div>
@@ -105,43 +128,45 @@
 
 
 <%# ----------------------------- debut reviews ----------------------------------- %>
-
-<div class="container mt-5 d-flex align-items-center justify-content-between">
-
-  <div>
-
-  <p>
-    Moyenne : <%= @average_rating %>
-  </p>
-
-    <% @reviews.each do |review| %>
-      <p>
-        <% Review::AUTHORIZED_RATINGS.each do |number| %>
-          <i class="fa<%= (number > review.rating) ? 'r' : 's' %> fa-star"></i>
+<div class="container mt-5">
+  <div class="d-flex align-items-center justify-content-between">
+      <div>
+      <% if @studio.reviews.blank? %>
+      <p></p>
+      <% else %>
+      <h3>Reviews</h3>
+      <p>Moyenne : <%= @average2 %></p>
+      <% end %>
+        <% @reviews.each do |review| %>
+        <%= link_to profile_path(review.user.id) do %>
+          <img class="avatar-square" src="<%=review.user.photo_id_url%>" alt="">
         <% end %>
-        <%= review.comment %>
-      </p>
+        <p>
+          <% Review::AUTHORIZED_RATINGS.each do |number| %>
+            <i class="fa<%= (number > review.rating) ? 'r' : 's' %> fa-star"></i>
+          <% end %>
+          <%= review.comment %>
+        </p>
     <% end %>
-  </div>
+    </div>
 
-  <div>
-    <h2>Leave Feedback after your stay :</h2>
-    <%= simple_form_for [@studio, @review] do |f| %>
-      <%= f.input :comment %>
-      <%= f.input :rating, as: :hidden  %>
-      <div class="my-3">
-        <% Review::AUTHORIZED_RATINGS.each do |index| %>
-          <i id="<%= index %>" class="review-rating far fa-star"></i>
+    <% if current_user != @studio.user %>
+      <div class="w-50">
+        <h2>Leave Feedback after your stay :</h2>
+        <%= simple_form_for [@studio, @review] do |f| %>
+        <%= f.input :comment %>
+        <%= f.input :rating, as: :hidden  %>
+        <div class="my-3">
+          <% Review::AUTHORIZED_RATINGS.each do |index| %>
+            <i id="<%= index %>" class="review-rating far fa-star"></i>
+          <% end %>
+        </div>
+        <%= f.submit class: "btn btn-blue", value: "Valider" %>
         <% end %>
       </div>
-      <%= f.submit class: "btn btn-primary", value: "Valider" %>
     <% end %>
   </div>
 </div>
-
-
-<%# ----------------------------- fin reviews ----------------------------------- %>
-
 
 
 <%# ---------------------------- BOUTONS ET LIENS -------------------------- %>

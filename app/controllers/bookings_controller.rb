@@ -6,7 +6,6 @@ class BookingsController < ApplicationController
     @booking.studio = @studio
     @booking.user_id = current_user.id
 
-    # current_user != @booking.studio.user
     if @booking.save
       redirect_to studio_path(@studio)
     else
@@ -19,7 +18,7 @@ class BookingsController < ApplicationController
     authorize @booking
     @booking.status = "Accepted"
     @booking.save
-    redirect_to profile_path(current_user)
+    redirect_to profile_path(current_user, anchor: "booking-#{@booking.id}")
   end
 
   def decline
@@ -27,7 +26,7 @@ class BookingsController < ApplicationController
     authorize @booking
     @booking.status = "Declined"
     @booking.save
-    redirect_to profile_path(current_user)
+    redirect_to profile_path(current_user, anchor: "booking-#{@booking.id}")
   end
 
   def destroy
