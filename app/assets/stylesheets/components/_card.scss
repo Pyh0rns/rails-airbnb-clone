@@ -2,9 +2,9 @@
   background-size: cover;
   background-position: center;
   height: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
   color: white;
   font-size: 24px;
   font-weight: bold;
@@ -19,6 +19,15 @@
   }
 }
 
+
+.title-studio-card {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card-category:hover{
   opacity: 1;
   margin-top: -5px;
@@ -31,13 +40,21 @@
 .card-category:hover .title-studio-card {
   display: none;
 }
+.address {
+  align-self: center;
+  padding-top: 60px;
+}
 
 .card-category:hover .card-studio-description {
-  display: block;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
   justify-content: center;
   margin: 2px;
   font-size: small;
-  padding: 30px;
+  padding: 15px;
+
 }
 
 .cards-grid {
@@ -49,6 +66,8 @@
   margin-bottom: 10px;
   width: 100%;
 }
+
+
 
 
 // Smallest device
