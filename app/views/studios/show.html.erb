@@ -99,12 +99,13 @@
 <%# -- SEULEMENT LE PROPRIETAIRE DU STUDIO VOIT LES BOOKINGS -- %>
   <div class="me-5 ms-5">
     <%if  @studio.user == current_user %>
-    <p>You have <%= @studio.bookings.length %> bookings pending</p>
+    <p>You have <%= @studio.bookings.length %> bookings for this studio</p>
       <% @studio.bookings.each do |booking| %>
-      <%# mettre un link_to vers son profile id pour pouvoir gerer les notifs  %>
-        <div class="card-booking">
-          <h3 style="color:black;"> You have a booking from <%= booking.user.nickname %></h3>
-        </div>
+        <%= link_to profile_path(current_user), style:"text-decoration:none;" do %>
+          <div class="card-booking">
+            <h3 style="color:black;"> You have a booking from <%= booking.user.nickname %></h3>
+          </div>
+        <% end %>
       <% end%>
     <%end %>
   </div>
@@ -135,6 +136,7 @@
       <% if @studio.reviews.blank? %>
       <p></p>
       <% else %>
+      <h3>Reviews</h3>
       <p>Moyenne : <%= @average2 %></p>
       <% end %>
         <% @reviews.each do |review| %>
@@ -150,19 +152,21 @@
     <% end %>
     </div>
 
-    <div class="w-50">
-      <h2>Leave Feedback after your stay :</h2>
-      <%= simple_form_for [@studio, @review] do |f| %>
-      <%= f.input :comment %>
-      <%= f.input :rating, as: :hidden  %>
-      <div class="my-3">
-        <% Review::AUTHORIZED_RATINGS.each do |index| %>
-          <i id="<%= index %>" class="review-rating far fa-star"></i>
+    <% if current_user == !@studio.user %>
+      <div class="w-50">
+        <h2>Leave Feedback after your stay :</h2>
+        <%= simple_form_for [@studio, @review] do |f| %>
+        <%= f.input :comment %>
+        <%= f.input :rating, as: :hidden  %>
+        <div class="my-3">
+          <% Review::AUTHORIZED_RATINGS.each do |index| %>
+            <i id="<%= index %>" class="review-rating far fa-star"></i>
+          <% end %>
+        </div>
+        <%= f.submit class: "btn btn-blue", value: "Valider" %>
         <% end %>
       </div>
-      <%= f.submit class: "btn btn-blue", value: "Valider" %>
-        <% end %>
-    </div>
+    <% end %>
   </div>
 </div>
 
