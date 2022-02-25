@@ -2,10 +2,11 @@
   justify-content: space-between;
   background: black;
   height: 80px;
-  position: fixed;
+  position: sticky;
   left: auto;
   width: 100%;
   z-index: 1000;
+  top: 0;
 }
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
@@ -87,7 +88,7 @@
   background: transparent;
   position: absolute;
   right: 14px;
-  top: -2px;
+  top: -0;
   z-index: 1;
 }
 .navbar-wagon-search-input {
