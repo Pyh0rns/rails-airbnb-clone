@@ -154,7 +154,7 @@
     <% end %>
     </div>
 
-    <% if current_user == !@studio.user %>
+    <% if current_user != @studio.user %>
       <div class="w-50">
         <h2>Leave Feedback after your stay :</h2>
         <%= simple_form_for [@studio, @review] do |f| %>
