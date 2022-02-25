@@ -61,3 +61,27 @@
   text-decoration: none;
   height: fit-content;
 }
+
+.btn-red {
+  border-radius: 5px;
+  background-color: #D23333;
+  color: $secondary-color;
+  text-decoration: none;
+  padding: 8px;
+  border: solid;
+  border-width: thin;
+ &:hover{
+   text-decoration: none;
+   color: $secondary-color;
+ }
+}
+
+.btn-white-undo {
+  border-radius: 5px;
+  color: $primary-color;
+  text-decoration: none;
+ &:hover{
+   text-decoration: none;
+   color: $primary-color;
+  }
+}

@@ -161,7 +161,7 @@
             <i id="<%= index %>" class="review-rating far fa-star"></i>
           <% end %>
         </div>
-        <%= f.submit class: "btn btn-blue", value: "Valider" %>
+        <%= f.submit class: "btn btn-blue", value: "Validate" %>
         <% end %>
       </div>
     <% end %>
@@ -171,16 +171,16 @@
 
 <%# ---------------------------- BOUTONS ET LIENS -------------------------- %>
 <div class="basdepage mt-5 ms-5">
-  <p> Back Home
-  <%= link_to studios_path, class: "text-warning" do %>
+  <p class="btn-white-undo"> Back Home
+  <%= link_to studios_path, class: "text-dark" do %>
     <i class="fas fa-undo"></i>
   <% end %>
   </p>
   <% if policy(@studio).edit? %>
-    <%= link_to 'edit studio', edit_studio_path(@studio), class:"btn btn-blue mb-3" %>
+    <%= link_to 'Edit studio', edit_studio_path(@studio), class:"btn-blue mb-3" %>
   <% end %>
   <% if policy(@studio).destroy? %>
-    <%= link_to 'delete studio', studio_path(@studio), class:"btn btn-warning",
+    <%= link_to 'Delete studio', studio_path(@studio), class:"btn-red",
     method: :delete, data: { confirm: "Are you sure?" } %>
   <% end %>
 </div>
