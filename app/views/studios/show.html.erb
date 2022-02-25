@@ -14,19 +14,20 @@
     <h1><%= @studio.title  %></h1>
 
     <div class="d-flex ml-3">
-    <% totalrating = 0 %>
+    <% @totalrating = 0 %>
     <%if @studio.reviews.length >= 1 %>
       <% @studio.reviews.each do |review| %>
-        <% totalrating += review.rating %>
+        <% @totalrating += review.rating %>
       <% end %>
 
-      <% totalrating / @studio.reviews.length.times do %>
+      <% @average2 = (@totalrating.fdiv(@studio.reviews.length)).round(1) %>
+      <% @average = @totalrating / @studio.reviews.length %>
+      <%# <% @average2 = @average.round(2) %> %>
+      <% @average.round.times do %>
         <i class="fas fa-star ml-1"></i>
       <% end %>
-
-
-      <% if (totalrating / @studio.reviews.length) < 5 %>
-        <% (5 - @studio.reviews.length).times do %>
+      <% if (@average) < 5 %>
+        <% (5 - @average.round).times do %>
           <i class="far fa-star ml-1"></i>
         <% end %>
       <% end %>
@@ -128,60 +129,14 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%# ----------------------------- debut 145 reviews ----------------------------------- %>
-
+<%# ----------------------------- debut reviews ----------------------------------- %>
 <div class="container mt-5">
-
   <div class="d-flex align-items-center justify-content-between">
-
-
-
-
       <div>
       <% if @studio.reviews.blank? %>
       <p></p>
       <% else %>
-      <p>Moyenne : <%= @average_rating %></p>
+      <p>Moyenne : <%= @average2 %></p>
       <% end %>
         <% @reviews.each do |review| %>
         <%= link_to profile_path(review.user.id) do %>
@@ -196,7 +151,6 @@
     <% end %>
     </div>
 
-
     <div class="w-50">
       <h2>Leave Feedback after your stay :</h2>
       <%= simple_form_for [@studio, @review] do |f| %>
@@ -210,14 +164,8 @@
       <%= f.submit class: "btn btn-blue", value: "Valider" %>
         <% end %>
     </div>
-
-
   </div>
 </div>
-
-
-<%# ----------------------------- fin reviews ----------------------------------- %>
-
 
 
 <%# ---------------------------- BOUTONS ET LIENS -------------------------- %>
