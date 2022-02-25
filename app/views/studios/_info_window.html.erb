@@ -1,2 +1,4 @@
-<h2><%= studio.title %></h2>
+<%= link_to studio_path(studio), class:"text-decoration-none" do %>
+  <h2><%= studio.title %></h2>
+<% end %>
 <p><%= studio.address %></p>
