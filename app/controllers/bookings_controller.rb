@@ -19,7 +19,7 @@ class BookingsController < ApplicationController
     authorize @booking
     @booking.status = "Accepted"
     @booking.save
-    redirect_to profile_path(current_user)
+    redirect_to profile_path(current_user, anchor: "booking-#{@booking.id}")
   end
 
   def decline
@@ -27,7 +27,7 @@ class BookingsController < ApplicationController
     authorize @booking
     @booking.status = "Declined"
     @booking.save
-    redirect_to profile_path(current_user)
+    redirect_to profile_path(current_user, anchor: "booking-#{@booking.id}")
   end
 
   def destroy
