@@ -6,7 +6,8 @@ class ReviewsController < ApplicationController
     @studio = Studio.find(params[:studio_id])
     @review.studio = @studio
     @review.user_id = current_user.id
-    if @review.save
+    # resolution temporaire du pb
+    if @review.save || @review.comment.blank? || @review.rating.blank?
       redirect_to studio_path(@studio)
     else
       render "studios/show"

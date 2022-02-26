@@ -118,7 +118,7 @@
       <% if booking.user == current_user %>
         <div class="card-booking">
           <h3 style="color:black;"> You booked this studio =>   </h3>
-          <h3 style="color:black;"> from <%= booking.start_date %> to <%= booking.start_date %> </h3>
+          <h3 style="color:black;"> from <%= booking.start_date %> to <%= booking.end_date %> </h3>
           <%# mettre un link to delete booking? %>
         </div>
       <% end %>
