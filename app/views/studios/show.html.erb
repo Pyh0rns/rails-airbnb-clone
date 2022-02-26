@@ -83,6 +83,9 @@
   <%# -------- partie formulaire ------------- %>
   <div class="w-50 ms-5 me-5">
     <h2 class="text-center">Book a session </h2>
+    <% if @booking.nil? %>
+      <% @booking = Booking.new %>
+    <% end %>
     <%= simple_form_for [@studio, @booking], html: {data: {controller: 'flatpickr' }} do |f| %>
     <div data-flatpickr-target= "date" data-bookings = "<%= @dates.to_json%>" ></div>
       <%= f.input :start_date, as: :string, required: true, input_html: {data:{target: 'start_date'}, class: "datepicker"} %>
@@ -119,7 +122,7 @@
         <div class="card-booking">
           <h3 style="color:black;"> You booked this studio =>   </h3>
           <h3 style="color:black;"> from <%= booking.start_date %> to <%= booking.end_date %> </h3>
-          <%# mettre un link to delete booking? %>
+          <%# mettre un link to delete et linkto profile ? %>
         </div>
       <% end %>
     <% end %>
@@ -155,6 +158,9 @@
     <% if current_user != @studio.user %>
       <div class="w-50">
         <h2>Leave Feedback after your stay :</h2>
+        <% if @review.nil? %>
+          <% @review = Review.new %>
+        <% end %>
         <%= simple_form_for [@studio, @review] do |f| %>
         <%= f.input :comment %>
         <%= f.input :rating, as: :hidden  %>

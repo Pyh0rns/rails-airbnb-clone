@@ -5,8 +5,7 @@ class BookingsController < ApplicationController
     @studio = Studio.find(params[:studio_id])
     @booking.studio = @studio
     @booking.user_id = current_user.id
-    if @booking.save || @booking.start_date.blank?
-      # temporaire car pb avec les reviews si render studios/show
+    if @booking.save
       redirect_to studio_path(@studio)
     else
       render "studios/show"
