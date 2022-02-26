@@ -5,8 +5,8 @@ class BookingsController < ApplicationController
     @studio = Studio.find(params[:studio_id])
     @booking.studio = @studio
     @booking.user_id = current_user.id
-
-    if @booking.save
+    if @booking.save || @booking.start_date.blank?
+      # temporaire car pb avec les reviews si render studios/show
       redirect_to studio_path(@studio)
     else
       render "studios/show"
@@ -43,6 +43,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:start_date, :end_date)
+    params.require(:booking).permit(:start_date, :end_date, :comment)
   end
 end
